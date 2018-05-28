@@ -15,7 +15,14 @@ const _User = mongoose.model('user', new mongoose.Schema({
 app.get('/data', function (req, res) {
     _User.find({},function (err,doc) {
         if(err){return}
-        return res.json(doc);
+        res.header('Access-Control-Allow-Origin', '*');
+        console.log(1);
+        return res.json({
+            "start": "react-scripts start",
+                "build": "react-scripts build",
+                "test": "react-scripts test --env=jsdom",
+                "eject": "react-scripts eject"
+        });
     })
 
 })

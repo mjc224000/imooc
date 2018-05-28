@@ -2,8 +2,6 @@ import React,{Component} from 'react';
 import Auth from './auth';
 import * as AuthReducer from './reducer/auth';
 import {connect} from 'react-redux';
-
-
 function mapStateToProps(state) {
     return {isAuth:state.auth}
 }
