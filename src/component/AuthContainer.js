@@ -13,7 +13,6 @@ function mapDispatchToProps(dispatch) {
  class AuthContainer extends Component{
 constructor(props){
     super(props);
-
 }
 render(){
     console.log(this.props);

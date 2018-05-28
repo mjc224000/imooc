@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import axios from 'axios'
 import AuthContainer from './component/AuthContainer';
 import {Button,List} from 'antd-mobile';
+import Login from './component/userManage/Login';
 import 'antd-mobile/dist/antd-mobile.css';
-import './App.css';
 let id=0;
 function makeID() {
     return id++;
@@ -18,6 +19,9 @@ class App extends Component {
 this.setState({solders:solders});
     }
   render() {
+     axios.get('/data').then(function (response) {
+         console.log(response);
+     })
     return (
       <div>
           <Button onClick={ this.handleAddSolder.bind(this)}>nmsl</Button>
