@@ -37,8 +37,7 @@ class Auth extends Component {
         console.log(isAuth);
         return (
                   <div>
-                    <Route path={'/login'} component={LoginContainer}/>
-                    <PrivateRoute path={'/boss'} isAuth={isAuth} component={BossContainer}/>
+                 <Route path={'/boss'} component={BossContainer}/>
                     <PrivateRoute path={'/interviewee'} isAuth={isAuth}  component={IntervieweeContainer}/>
                   </div>
           )

@@ -17,6 +17,7 @@ class Login extends Component {
 
     render() {
         const loading=this.props.loading;
+        console.log(this.props,'from log')
         return (
             <List>
                 {this.props.auth?"aa":"bb"}

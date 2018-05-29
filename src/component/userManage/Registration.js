@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {List, InputItem, WhiteSpace, Button,Toast} from 'antd-mobile';
-class Registration extends Component{
+export default class Registration extends Component{
     constructor(props){
         super(props);
         this.state={
