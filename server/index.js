@@ -12,7 +12,7 @@ const _User = mongoose.model('user', new mongoose.Schema({
     age: {type: Number, require: true}
 }))
 
-userRouter.initialize(app);
+app.use('/user',userRouter)
 app.get('/data', function (req, res) {
     _User.find({},function (err,doc) {
         if(err){return}
