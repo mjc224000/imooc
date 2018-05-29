@@ -19,6 +19,7 @@ class Login extends Component {
         const loading=this.props.loading;
         return (
             <List>
+                {this.props.auth?"aa":"bb"}
                 <InputItem>userName: </InputItem>
                 <WhiteSpace/>
                 <InputItem>passWord: </InputItem>
