@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import { createForm, formShape } from 'rc-form';
 import propTypes from 'prop-types';
 import imgURL from './../img/logo.png';
-
+///http://react-component.github.io/form/examples/server-validate.html
 const RadioItem = Radio.RadioItem;
 export  class Registration extends Component {
    static propTypes={form:formShape}
