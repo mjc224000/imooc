@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import {List, InputItem, WhiteSpace, Button} from 'antd-mobile';
-
+import {List, InputItem, WhiteSpace, Button, WingBlank} from 'antd-mobile';
+import {Link} from 'react-router-dom';
+import './Login.css';
+import imgURL from './../img/logo.png'
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -11,25 +13,25 @@ class Login extends Component {
     }
 
     handleLoginClick(e) {
-        const {username,password}=this.state;
-        this.props.handleLogin({username,password});
+        const {username, password} = this.state;
+        this.props.handleLogin({username, password});
     }
 
     render() {
-        const loading=this.props.loading;
-        console.log(this.props,'from log')
+        const loading = this.props.loading;
+        console.log(this.props, 'from log')
         return (
             <List>
-                {this.props.auth?"aa":"bb"}
-                <InputItem>userName: </InputItem>
+                <WingBlank ><div style={{textAlign:'center'}}><img className='logo' src={imgURL}/>  </div> </WingBlank>
+                <WingBlank> <InputItem>userName: </InputItem> </WingBlank>
                 <WhiteSpace/>
-                <InputItem>passWord: </InputItem>
+                <WingBlank><InputItem>passWord: </InputItem></WingBlank>
                 <WhiteSpace/>
-                <Button onClick={this.handleLoginClick.bind(this)}>登录{loading?'loading':''}</Button>
+                <WingBlank> <Button onClick={this.handleLoginClick.bind(this)}>{loading ? 'loading' : 'Login'}</Button></WingBlank>
+                <WingBlank> <Button><Link to={'/registration'}>Register</Link></Button></WingBlank>
             </List>
         )
     }
 }
-
 
 export default Login

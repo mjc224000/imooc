@@ -10,6 +10,9 @@ router.use(function timeLog(req, res, next) {
 router.get('/info', function(req, res) {
     res.json({'code':1});
 });
+router.get('/',function (req,res) {
+    res.json({'name':'nmsl'});
+})
 // 定义 about 页面的路由
 router.get('/about', function(req, res) {
     res.send('About birds');
