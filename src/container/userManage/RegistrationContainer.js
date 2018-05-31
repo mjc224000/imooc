@@ -1,4 +1,10 @@
 import {connect} from 'react-redux';
-import {loginAsync} from './../../reducer/AuthReducer';
+import {loginAsync,register} from './../../reducer/AuthReducer';
 import Registration from './../../component/userManage/Registration';
-export default connect()(Registration)
+function mapDispatchToProps(dispatch) {
+    return{register:option=>dispatch(register(option)) }
+}
+function mapStateToProps(state) {
+    return{...state,errorMsg:state.registerErrMsg }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Registration)
