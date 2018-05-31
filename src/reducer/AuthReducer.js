@@ -1,4 +1,6 @@
 import axios from 'axios';
+import redirectTo from './utility';
+
 const LOGIN='LOGIN';
 const LOGOUT='LOGOUT';
 const LOGIN_ASYNC='LOGIN_ASYNC';
@@ -9,8 +11,8 @@ const REGISTER_ERROR='REGISTER_ERROR';
 const Auth={
     auth:false,
     loading:false,
-    redirectTo:'',
-    registerErrMsg:'',
+    redirectTo:null,
+    registerErrMsg:null,
 }
 //reducer
 export default function AuthReducer(state=Auth,action){
@@ -19,7 +21,7 @@ export default function AuthReducer(state=Auth,action){
         case LOGOUT:return{...state,auth:false};
         case LOADING:return {...state,loading:true};
         case FINISH:return {...state,loading:false};
-        case REGISTER_SUCCESS:return{...state,auth:true};
+        case REGISTER_SUCCESS:return{...state,auth:true,registerError:null,redirectTo:action.redirectTo};
         case REGISTER_ERROR:return{...state,auth:false,registerErrMsg:action.errMsg}
         default :return state
     }
@@ -41,15 +43,22 @@ export function logout() {
 function registerError(msg) {
     return{type:REGISTER_ERROR,errMsg:msg}
 }
+function registerSuccess(type) {
+    return {type:REGISTER_SUCCESS ,redirectTo:redirectTo(type)}
+}
 export function register(option) {
-   const {repeatPassword,password}=option;
+   const {repeatPassword,password,type}=option;
 
     if(repeatPassword!=password){
-       return registerError('the both input password must be consistent')
+    return registerError('the both input password must be consistent')
    }
    return function (dispatch) {
-       axios.get('/data').then(val=>{
-           console.log(val);})
+       axios.post('/user/register',{...option}).then(res=>{
+
+     if(res.status==200 && res.data.code===0){
+         dispatch(registerSuccess(type));
+     }
+          });
    }
 
 }

@@ -12,7 +12,9 @@ app.get('/data', function (req, res) {
     res.json({'code': 1});
 
 })
-
+app.get('/',function (req,res) {
+    res.json({'nmsl':'nmsl'});
+})
 
 app.listen(9093, function () {
     console.log('at 9093')

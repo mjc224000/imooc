@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {List, InputItem, WhiteSpace, Button, Toast, WingBlank, Radio} from 'antd-mobile';
-import {Link} from 'react-router-dom';
+import {Link,Redirect} from 'react-router-dom';
 import {createForm, formShape} from 'rc-form';
 import propTypes from 'prop-types';
 import {register} from "../../reducer/AuthReducer";
@@ -35,8 +35,10 @@ export class Registration extends Component {
     render() {
  const {type}=this.state;
  const errorMsg=this.props.errorMsg||this.state.errorMsg;
-        console.log(this.props);
+       const {url}= this.props.redirectTo;
+
         return (<List>
+            {url?<Redirect to={url}/>:null}
             <WingBlank>
                 <div style={{textAlign: 'center'}}><img className='logo' src={imgURL}/></div>
             </WingBlank>

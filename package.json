@@ -15,7 +15,8 @@
     "redux-thunk": "^2.2.0",
     "rc-form":"^2.2.0",
     "react-redux": "^5.0.7",
-    "axios": "latest"
+    "axios": "latest",
+    "body-parser":"^1.18.3"
   },
   "scripts": {
     "start": "react-scripts start",
