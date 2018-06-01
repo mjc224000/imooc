@@ -1,19 +1,20 @@
-const userRouter=require('./user')
+const userRouter=require('./user');
+const infoRouter=require('./info');
 const express = require('express');
+const utils=require('utility');
 const app = express();
 var mongoose = require("mongoose");
 var db = mongoose.connect('mongodb://localhost:27017');
 mongoose.connection.on('connected', function (err, sus) {
 
 })
-app.use('/user',userRouter)
-app.get('/data', function (req, res) {
-    console.log(1);
-    res.json({'code': 1});
 
-})
+app.use('/user',userRouter);
+app.use('/info',infoRouter);
+
 app.get('/',function (req,res) {
-    res.json({'nmsl':'nmsl'});
+
+    res.send( utils.md5('aaaa'));
 })
 
 app.listen(9093, function () {

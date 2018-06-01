@@ -35,10 +35,10 @@ export class Registration extends Component {
     render() {
  const {type}=this.state;
  const errorMsg=this.props.errorMsg||this.state.errorMsg;
-       const {url}= this.props.redirectTo;
+       this.props.redirectTo;
 
         return (<List>
-            {url?<Redirect to={url}/>:null}
+            {this.props.redirectTo?<Redirect to={this.props.redirectTo}/>:null}
             <WingBlank>
                 <div style={{textAlign: 'center'}}><img className='logo' src={imgURL}/></div>
             </WingBlank>
@@ -49,6 +49,7 @@ export class Registration extends Component {
             <WhiteSpace/>
             <WhiteSpace/>
             <WingBlank> <InputItem   type="password"
+                                     extra={''}
                                    onChange={(value) => this.handleValueChange('password', value)}>密码： </InputItem></WingBlank>
             <WhiteSpace/>
             <WingBlank> <InputItem type={'password'}

@@ -47,10 +47,13 @@ function registerSuccess(type) {
     return {type:REGISTER_SUCCESS ,redirectTo:redirectTo(type)}
 }
 export function register(option) {
-   const {repeatPassword,password,type}=option;
-
+   const {username, repeatPassword,password,type}=option;
+     if(username.replace(' ','').length!==username.length)
+         return registerError('username cannot contain space');
+if(!username.trim().length ||!password.length)
+    return registerError('username and password can not be empty');
     if(repeatPassword!=password){
-    return registerError('the both input password must be consistent')
+    return registerError('the both input password must be consistent');
    }
    return function (dispatch) {
        axios.post('/user/register',{...option}).then(res=>{

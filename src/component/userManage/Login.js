@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {List, InputItem, WhiteSpace, Button, WingBlank} from 'antd-mobile';
 import {Link} from 'react-router-dom';
 import './Login.css';
-import imgURL from './../img/logo.png'
+import imgURL from './../img/logo.png';
 class Login extends Component {
     constructor(props) {
         super(props);
