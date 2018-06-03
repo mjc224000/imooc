@@ -1,8 +1,8 @@
 import {connect} from 'react-redux';
-import {loginAsync,login,clearLoginErrorMsg} from './../../reducer/AuthReducer';
+import {login} from './../../reducer/AuthReducer';
 import Login from './../../component/userManage/Login';
-const mapStateToProps=(state)=>({loading:state.loading,isAuth:state.auth,errMsg:state.loginErrMsg,...state});
+const mapStateToProps=(state)=>({isAuth:state.auth,errMsg:state.loginErrMsg,...state});
 const mapDispatchToProps=(dispatch)=>{
-    return {handleLogin:option=>dispatch(login(option)),clearMsg:dispatch(clearLoginErrorMsg) }
+    return {handleLogin:option=>dispatch(login(option)) }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Login);

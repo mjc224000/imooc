@@ -22,10 +22,17 @@ export class Registration extends Component {
 
         this.handleValueChange = this.handleValueChange.bind(this);
         this.handleSubmit=this.handleSubmit.bind(this);
+        this._redirectTo=this._redirectTo.bind(this);
     }
 
+_redirectTo(url){
+        Toast.hide();
+        if(url)
+        this.props.history.push(url);
+}
     handleSubmit = () => {
-        this.props.register({...this.state});
+          Toast.loading('loading',60)
+        this.props.register({...this.state,cb:this._redirectTo});
     }
 
     handleValueChange(key, value) {
@@ -35,10 +42,8 @@ export class Registration extends Component {
     render() {
  const {type}=this.state;
  const errorMsg=this.props.errorMsg||this.state.errorMsg;
-       this.props.redirectTo;
-
         return (<List>
-            {this.props.redirectTo?<Redirect to={this.props.redirectTo}/>:null}
+
             <WingBlank>
                 <div style={{textAlign: 'center'}}><img className='logo' src={imgURL}/></div>
             </WingBlank>
@@ -58,8 +63,8 @@ export class Registration extends Component {
                                    onChange={(value) => this.handleValueChange('type', 'genius')}>
                 Genius
             </RadioItem> </WingBlank>
-            <WingBlank><RadioItem key={1} checked={type === 'StreetGirl'}
-                                  onChange={(value) => this.handleValueChange('type', 'StreetGirl')}> Street
+            <WingBlank><RadioItem key={1} checked={type === 'boss'}
+                                  onChange={(value) => this.handleValueChange('type', 'boss')}> Street
                 Girl</RadioItem> </WingBlank>
             <WingBlank> <Button type={'primary'}><Link to={'/login'}>Login</Link></Button></WingBlank>
             <WhiteSpace/>

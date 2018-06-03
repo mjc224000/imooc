@@ -6,7 +6,10 @@ var userSchema=new Schema({
     password:{type:String,required:true},
     type:{type:String,required:true},
     company:{type:String,required:false},
-    avatar:{type:String}
+    avatar:{type:String},
+    salary:{type:Number},
+    position:{type:String},
+    positionDesc:{type:String},
 },{chat:Array})
 AppUser=mongoose.model('AppUser',userSchema);
 module.exports=AppUser;

@@ -7,12 +7,12 @@ import Boss from './../../component/Boss/Boss';
         super(props);
     }
     render(){
-        if(this.props.isAuth){
-            return <Boss/>
+       if(this.props.isAuth){
+            return <Boss {...this.props}/>
         }
         return(<Redirect to={'/login'}/>)
     }
 }
 export default connect(function (state) {
-    return{isAuth:state.auth}
+    return{...state,isAuth:state.auth}
 })(BossContainer)

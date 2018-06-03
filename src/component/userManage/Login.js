@@ -12,29 +12,39 @@ class Login extends Component {
             loading:true
         }
         this.handleOnchange=this.handleOnchange.bind(this);
+        this._callback=this._callback.bind(this);
+    }
+    _callback(url){
+        Toast.hide();
+        if(url){
+            console.log(url);
+
+            this.props.history.push(url);
+        }
     }
 
     handleLoginClick(e) {
         Toast.loading('loading',60);
-        let cb=Toast.hide.bind(Toast);
+        let cb=this._callback;
         const {username, password} = this.state;
 
         this.props.handleLogin({username, password,cb});
     }
    handleOnchange(key,val){
         this.setState({[key]:val});
-        this.props.clearMsg();
+
    }
 
     render() {
 const errorMsg=this.props.errMsg;
+        console.log(require('./Login.css'));
         return (
             <List>
                 <WingBlank ><div style={{textAlign:'center'}}><img className='logo' src={imgURL}/>  </div> </WingBlank>
                 <WingBlank> <div className='validate'>{errorMsg}</div></WingBlank>
                 <WingBlank> <InputItem onChange={(val)=>this.handleOnchange('username',val)}>userName: </InputItem> </WingBlank>
                 <WhiteSpace/>
-                <WingBlank><InputItem onChange={(val)=>this.handleOnchange('password',val)}>passWord: </InputItem></WingBlank>
+                <WingBlank><InputItem type={'password'} onChange={(val)=>this.handleOnchange('password',val)}>passWord: </InputItem></WingBlank>
                 <WhiteSpace/>
                 <WingBlank> <Button  type={'primary'} onClick={this.handleLoginClick.bind(this)}>{'Login'}</Button></WingBlank>
                 <WhiteSpace/>

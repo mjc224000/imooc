@@ -11,7 +11,7 @@ router.use(bodyParser.json());
 // 定义网站主页的路由
 router.get('/boss', function (req, res) {
     console.dir(req.cookies)
-    res.end('cookies get ok')
+    res.json({cookie:req.cookies})
 })
 router.get('/',function (req,res) {
     res.cookie('resc', '设置到cookie里的值', { expires: new Date(Date.now() + 900000), httpOnly: true });
