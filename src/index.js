@@ -6,7 +6,6 @@ import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import {connect, Provider} from 'react-redux';
 import {BrowserRouter as Router, Redirect, Route,Link} from 'react-router-dom';
-import Auth from './Router/Router';
 import Login from './container/userManage/LoginContainer';
 import Registration from './container/userManage/RegistrationContainer';
 import BossContainer from './container/BossContainer/BossContainer'
@@ -26,7 +25,7 @@ function Index() {
                     <Route path={'/login'} component={Login}/>
                     <Route path={'/registration'} component={Registration}/>
                    <Route path={'/boss'} component={BossContainer}/>
-                    <Auth/>
+
                 </div>
 
             </Router>
