@@ -6,4 +6,13 @@ const getToken=(function () {
         return Token
     }
 })()
-module.exports.getToken=getToken
+const AppUser=(function () {
+    let _User=null;
+    return function (instance) {
+        if(instance)
+            _User=instance;
+        return _User
+    }
+})()
+module.exports.getToken=getToken;
+module.exports._User=AppUser;
