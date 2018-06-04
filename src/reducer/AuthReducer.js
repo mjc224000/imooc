@@ -1,8 +1,6 @@
 import axios from 'axios';
 import {getRedirectPath} from './util';
 
-
-
 const LOGIN_ERROR = 'LOGIN_ERROR';
 const LOGOUT = 'LOGOUT';
 const REGISTER_ERROR = 'REGISTER_ERROR';
@@ -58,7 +56,6 @@ function loginErr(errMsg) {
 export function logout() {
     return {type: LOGOUT}
 }
-
 function registerError(msg) {
     return {type: REGISTER_ERROR, errMsg: msg}
 }
@@ -80,11 +77,17 @@ export function register(option) {
         axios.post('/user/register', {...option}).then(res => {
 
             if (res.status === 200 && res.data.code === 0) {
-             
+
                 cb(getRedirectPath({type,avatar:null}))
                 dispatch(authSuccess());
             }
         });
     }
 
+}
+export  const update=(option)=>(dispatch)=>{
+    axios.get('/info/bossUpdate',{params:{...option}}).then(res=>{
+        console.log(res.data);
+    })
+   console.log({...option})
 }
