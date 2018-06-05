@@ -60,7 +60,7 @@ export default class TabBarExample extends React.Component {
 
     render() {
         var navList = this.props.navList || data;
-        var hide = 'Genius';
+        var hide = 'zz';
         console.log(this.props.history);
         navList=navList.filter((v)=>v.hide!==hide);
         return (
@@ -84,7 +84,6 @@ export default class TabBarExample extends React.Component {
                     unselectedTintColor="#949494"
                     tintColor="#33A3F4"
                     barTintColor="white"
-                    hidden={this.state.hidden}
                     style={{position: 'fixed', bottom: '0'}}
                 >
                     {navList.map(v => {
