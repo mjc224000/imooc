@@ -29,7 +29,7 @@ function Index() {
                     <Link to={'/login'}>login</Link>
                     <Link to={'/registration'}>registration</Link>
                     <Link to={'/boss' }>boss</Link>
-
+                    <Redirect to={'/login'}/>
                         <Route path={'/login'} component={Login}/>
                         <Route path={'/registration'} component={Registration}/>
               <DashBoard></DashBoard>

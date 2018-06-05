@@ -81,6 +81,7 @@ handleTabPress(){
                     tintColor="#33A3F4"
                     barTintColor="white"
                     hidden={this.state.hidden}
+                    style={{position:'fixed' ,bottom:'0'}}
                 >
                     <TabBar.Item
                         title="Life"
