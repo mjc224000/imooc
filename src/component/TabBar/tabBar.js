@@ -1,18 +1,25 @@
-import React,{Component} from 'react';
-import propTypes from 'prop-types'
-class TabBar extends Component{
-   static propTypes={
-       navList:propTypes.array
-   }
-   Icon(){
-       return 
-   }
-    render(){
+import React, {Component} from 'react';
+import propTypes from 'prop-types';
+import './tabBar.css';
 
-        return (<div className='tab-bar-footer'>
-            <ul>
+class TabBar extends Component {
+    static propTypes = {
+        navList: propTypes.array
+    }
 
+    Icon() {
+        return
+    }
+
+    render() {
+
+        return (
+            <ul className={'tab-bar-footer'}>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
             </ul>
-        </div> )
+        )
     }
 }
