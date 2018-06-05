@@ -19,7 +19,7 @@ class BossContainer extends Component{
         this.handleValueChange=this.handleValueChange.bind(this)
         this.handleUpdate=this.handleUpdate.bind(this);
     }
-    componentWillMount(){
+    componentDidMount(){
           axios.get('/info/bossInfo').then((res)=>{
                  this.setState({...res.data.data});
              })
