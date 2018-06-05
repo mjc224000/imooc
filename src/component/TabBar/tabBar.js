@@ -1,25 +1,41 @@
 import React, {Component} from 'react';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
+import './iconfont.css'
 import './tabBar.css';
-
+var dataList=[{
+    text:'nmsl',
+    className:'iconfont icon-yonghuzhongxin',
+    path:'/geniusinfo'
+}]
 class TabBar extends Component {
     static propTypes = {
-        navList: propTypes.array
+        onPress:PropTypes.func.isRequired,
+        navList:PropTypes.array.isRequired
+
+    }
+    constructor(props){
+        super(props)
+        this.handlePress=this.handlePress.bind(this);
     }
 
-    Icon() {
-        return
-    }
+  handlePress(path){
+        this.props.onPress(path);
+  }
 
     render() {
-
+       const navList=this.props.navList;
+        console.log(navList);
         return (
             <ul className={'tab-bar-footer'}>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
+
+                {navList.map(v=>{
+                   return (<li onTouchStart={()=>this.handlePress(v.path)} onClick={()=>this.handlePress(v.path)}>
+                        <i className={v.className}></i>
+                        <span>{v.title}</span>
+                    </li>)
+                })}
+                </ul>
         )
     }
 }
+export default TabBar

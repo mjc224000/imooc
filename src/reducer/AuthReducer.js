@@ -41,7 +41,7 @@ export function login({username, password, cb}) {
                 cb(getRedirectPath({type,avatar}));
             } else {
                 cb();
-                return dispatch(loginErr('网络错误'))
+                return dispatch(loginErr('用户名密码错误'))
             }
 
         })

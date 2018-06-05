@@ -13,7 +13,8 @@ const data = [
         title: 'Boss',
         path: '/geniusInfo',
         component: GeniusList,
-        hide: 'Boss'
+        hide: 'Boss',
+        text:''
     },
     {
         title: 'Genius',
@@ -35,11 +36,18 @@ const data = [
     }
 ]
 class DashBoardContainer extends Component{
+    constructor(props){
+        super(props);
+     this.handlePress=this.handlePress.bind(this);
+    }
+    handlePress(url){
+        this.props.history.push(url);
+    }
     render(){
         if(!this.props.isAuth){
             return (<Redirect to={'/login'}></Redirect>)
         }
-        return <DashBoard {...this.props} navList={data}/>
+        return <DashBoard {...this.props} navList={data} onPress={this.handlePress}/>
     }
 
 }
