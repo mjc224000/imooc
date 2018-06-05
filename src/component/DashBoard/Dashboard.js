@@ -53,13 +53,16 @@ export default class TabBarExample extends React.Component {
             fullScreen: false,
         };
     }
-handleTabPress(){
 
-}
+    handleTabPress() {
+
+    }
+
     render() {
         var navList = this.props.navList || data;
         var hide = 'Genius';
         console.log(this.props.history);
+        navList=navList.filter((v)=>v.hide!==hide);
         return (
             <div style={this.state.fullScreen ? {
                 position: 'fixed',
@@ -71,8 +74,9 @@ handleTabPress(){
                 <NavBar leftContent={<Icon type={'left'} onClick={() => this.props.history.go(-1)}/>}>
                     {}
                 </NavBar>
-                {navList.map(v => {
-                    if (v.hide !== hide) {
+                {
+                    navList.map(v => {
+                    if (1) {
                         return <Route path={v.path} component={v.component}></Route>
                     }
                 })}
@@ -81,9 +85,23 @@ handleTabPress(){
                     tintColor="#33A3F4"
                     barTintColor="white"
                     hidden={this.state.hidden}
-                    style={{position:'fixed' ,bottom:'0'}}
+                    style={{position: 'fixed', bottom: '0'}}
                 >
-                    <TabBar.Item
+                    {navList.map(v => {
+                        return (<TabBar.Item
+                        title={v.title}
+                        key={v.pathname}
+                        icon={ <div
+                            style={{
+                            width: '22px',
+                            height: '22px',
+                            background: 'url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  21px 21px no-repeat'
+                        }}> </div> }
+                        selected={this.props.history.location.pathname===v.pathname}
+                        onPress={()=>this.props.history.push(v.path)}
+                        />)
+                    })}
+                    {/* <TabBar.Item
                         title="Life"
                         key="Life"
                         icon={<div style={{
@@ -100,7 +118,7 @@ handleTabPress(){
                         }}
                         />
                         }
-                        selected={this.state.selectedTab === 'blueTab'}
+                        selected={this.props.history.location.pathname==='/geniusInfo'}
                         badge={1}
                         onPress={() => {
                             this.props.history.push('/geniusInfo');
@@ -181,7 +199,7 @@ handleTabPress(){
                         }}
                     >
 
-                    </TabBar.Item>
+                    </TabBar.Item>*/}
                 </TabBar>
             </div>
         );

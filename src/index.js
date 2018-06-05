@@ -5,7 +5,7 @@ import AuthReducer from './reducer/AuthReducer';
 import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import {connect, Provider} from 'react-redux';
-import {BrowserRouter as Router, Redirect, Route,Link} from 'react-router-dom';
+import {BrowserRouter as Router, Redirect, Route,Link,Switch} from 'react-router-dom';
 import Login from './container/userManage/LoginContainer';
 import Registration from './container/userManage/RegistrationContainer';
 import BossContainer from './container/BossContainer/BossContainer';
@@ -26,13 +26,12 @@ function Index() {
     return (<Provider store={store}>
             <Router>
                 <div>
-                    <Link to={'/login'}>login</Link>
-                    <Link to={'/registration'}>registration</Link>
-                    <Link to={'/boss' }>boss</Link>
-                    <Redirect to={'/login'}/>
+
+                    <Switch>
                         <Route path={'/login'} component={Login}/>
                         <Route path={'/registration'} component={Registration}/>
-              <DashBoard></DashBoard>
+                        <DashBoard></DashBoard>
+                    </Switch>
 
                 </div>
 

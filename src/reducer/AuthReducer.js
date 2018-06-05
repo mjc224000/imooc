@@ -13,6 +13,7 @@ const Auth = {
 }
 //reducer
 export default function AuthReducer(state = Auth, action) {
+
     switch (action.type) {
         case AUTH_SUCCESS: return{...state,auth:true}
         case LOGIN_ERROR:
@@ -36,8 +37,8 @@ export function login({username, password, cb}) {
         axios.post('/user/login', {username, password}).then(function (res) {
             if (res.status === 200 && res.data.code === 0) {
                 const {type,avatar} = res.data.data;
+                dispatch(authSuccess());
                 cb(getRedirectPath({type,avatar}));
-                return dispatch(authSuccess())
             } else {
                 cb();
                 return dispatch(loginErr('网络错误'))
