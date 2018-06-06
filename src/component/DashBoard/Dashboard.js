@@ -65,8 +65,6 @@ export default class TabBarExample extends React.Component {
 
     render() {
         var navList = this.props.navList || data;
-        var hide = 'zz';
-        navList=navList.filter((v)=>v.hide!==hide);
         return (
             <div style={this.state.fullScreen ? {
                 position: 'fixed',

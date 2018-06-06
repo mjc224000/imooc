@@ -1,13 +1,9 @@
 import React, {Component} from 'react';
-import {Icon, InputItem, List, NavBar, WhiteSpace, TextareaItem, WingBlank, Button, Modal, Grid} from 'antd-mobile';
+import { InputItem, List, WhiteSpace, TextareaItem, WingBlank, Button, Modal, Grid} from 'antd-mobile';
 import {Link} from 'react-router-dom';
 import propTypes from 'prop-types';
-import imgurl from "./../img/logo.png"
-import {user} from "../../reducer/user";
-
 let avatarList = [];
-
-function _avartars() {
+export function _avartars() {
     if(!avatarList.length){
         for (var i = 1; i < 5; i++) {
             avatarList.push('avatars-material-man-' + i + '.png');
@@ -25,7 +21,6 @@ export default class Boss extends Component {
         onUpdate: propTypes.func,
         onValueChange: propTypes.func,
         userInfo: propTypes.object,
-        avatarList: propTypes.array.isRequired
     }
 
     constructor(props) {

@@ -10,6 +10,7 @@ var userSchema=new Schema({
     salary:{type:Number},
     position:{type:String},
     positionDesc:{type:String},
+    resume:{type:String}
 },{chat:Array})
 AppUser=mongoose.model('AppUser',userSchema);
 module.exports=AppUser;

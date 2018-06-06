@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import Boss from './../../component/Boss/Boss';
+import Boss from './../../component/Boss/BossInfo';
 import axios from 'axios';
 import {update} from "../../reducer/AuthReducer";
 
@@ -13,7 +13,6 @@ class BossContainer extends Component{
             position: null,
             positionDesc: null,
             salary: 0,
-            showModal:true,
             avatar:''
         }
         this.handleValueChange=this.handleValueChange.bind(this)
@@ -21,7 +20,7 @@ class BossContainer extends Component{
     }
     componentDidMount(){
         console.log(1);
-        axios.get('/info/bossInfo').then((res)=>{
+        axios.get('/info/userInfo').then((res)=>{
                  this.setState({...res.data.data});
             console.log(res);
         })

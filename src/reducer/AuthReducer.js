@@ -9,13 +9,14 @@ const Auth = {
     auth: false,
     loading: false,
     registerErrMsg: null,
-    loginErrMsg: null
+    loginErrMsg: null,
+    type:null
 }
 //reducer
 export default function AuthReducer(state = Auth, action) {
 
     switch (action.type) {
-        case AUTH_SUCCESS: return{...state,auth:true}
+        case AUTH_SUCCESS: return{...state,auth:true,type:action.payload}
         case LOGIN_ERROR:
             return {...state, auth: false, loginErrMsg: action.errMsg}
         case LOGOUT:
@@ -37,7 +38,7 @@ export function login({username, password, cb}) {
         axios.post('/user/login', {username, password}).then(function (res) {
             if (res.status === 200 && res.data.code === 0) {
                 const {type,avatar} = res.data.data;
-                dispatch(authSuccess());
+                dispatch(authSuccess(type));
                 cb(getRedirectPath({type,avatar}));
             } else {
                 cb();
@@ -47,8 +48,8 @@ export function login({username, password, cb}) {
         })
     }
 }
-function authSuccess() {
-    return {type:AUTH_SUCCESS}
+function authSuccess(payload) {
+    return {type:AUTH_SUCCESS,payload}
 }
 
 function loginErr(errMsg) {
@@ -79,15 +80,16 @@ export function register(option) {
 
             if (res.status === 200 && res.data.code === 0) {
 
-                cb(getRedirectPath({type,avatar:null}))
-                dispatch(authSuccess());
+
+                const type=res.data.data.type;
+                dispatch(authSuccess(type));
+                cb(getRedirectPath({type,avatar:null}));
             }
         });
     }
 
 }
 export  const update=(option)=>(dispatch)=>{
-    axios.get('/info/bossUpdate',{params:{...option}}).then(res=>{
-        console.log(res.data);
+    axios.get('/info/userUpdate',{params:{...option}}).then(res=>{
     })
 }

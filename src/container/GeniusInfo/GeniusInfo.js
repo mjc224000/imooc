@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import Boss from './../../component/GeniusInfo/GeniusInfo';
+import GeniusInfo from './../../component/GeniusInfo/GeniusInfo';
 import axios from 'axios';
 import {update} from "../../reducer/AuthReducer";
 
@@ -32,7 +32,7 @@ class GeniusInfoContainer extends Component{
     }
     render(){
         if(this.props.isAuth){
-            return <Boss {...this.props} onUpdate={this.handleUpdate} onValueChange={this.handleValueChange} userInfo={{...this.state}} />
+            return <GeniusInfo {...this.props} onUpdate={this.handleUpdate} onValueChange={this.handleValueChange} userInfo={{...this.state}} />
         }
         return(<Redirect to={'/login'}/>)
     }

@@ -16,7 +16,7 @@ router.use(function (req, res, next) {
     next();
 })
 
-router.get('/bossUpdate', function (req, res) {
+router.get('/userUpdate', function (req, res) {
     const {position, positionDesc, company, salary, avatar} = req.query;
     AppUser.update({username: _User().username},
         {position, positionDesc, company, salary, avatar},
@@ -30,14 +30,11 @@ router.get('/bossUpdate', function (req, res) {
             }
         })
 })
-router.get('/bossInfo', function (req, res) {
+router.get('/userInfo', function (req, res) {
     const instance = _User();
     if (instance) {
-
-        const {salary, company, position, positionDesc, avatar, username} = instance;
-        return res.json({code: 0, data: {salary, company, position, positionDesc, avatar, username}});
+        return res.json({code: 0, data:instance});
     }
-
 })
 
 module.exports = router;
