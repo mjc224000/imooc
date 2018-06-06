@@ -4,7 +4,6 @@ const getToken=require('./utils') .getToken;
 const  cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const AppUser = require('./model');
-const _User=require('./utils')._User;
 const router = express.Router();
 // 该路由使用的中间件
 router.use(bodyParser.json());
@@ -28,7 +27,7 @@ router.post('/login', function (req, res) {
             var userPassword = instance.password;
             if (userPassword ===md5Password);
             {  res.cookie('Token',getToken(),{ expires: new Date(Date.now() + 900000), httpOnly: true })
-             _User(instance);
+
                 return   res.json({code: 0, msg: "login success",data:instance,Token:getToken()})
 
             }
@@ -54,7 +53,7 @@ router.post('/register', function (req, res) {
             if (err) {
                 res.json({code: 1, msg: 'server error'})
             } else {
-                _User(instance);
+
                 res.cookie('Token',getToken(),{ expires: new Date(Date.now() + 900000), httpOnly: true })
                 res.json({code: 0, msg: "register success",data:instance});
             }
@@ -62,7 +61,7 @@ router.post('/register', function (req, res) {
         });
     })
 });
-router.get('/all', function (req, res) {
+router.get('/all', function (req , res) {
     AppUser.find({}, function (err, instances) {
         res.json(instances);
     })

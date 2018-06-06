@@ -6,15 +6,5 @@ const getToken=(function () {
         return Token
     }
 })()
-const AppUser=(function () {
-    let _User=null;
-    return function (instance) {
-        if(instance){
-        _User=_User?{..._User,...instance}:instance;
-        }
 
-        return _User
-    }
-})()
 module.exports.getToken=getToken;
-module.exports._User=AppUser;

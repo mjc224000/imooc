@@ -4,19 +4,26 @@ import {getRedirectPath} from './util';
 const LOGIN_ERROR = 'LOGIN_ERROR';
 const LOGOUT = 'LOGOUT';
 const REGISTER_ERROR = 'REGISTER_ERROR';
-const AUTH_SUCCESS='AUTH_SUCCESS';
+const AUTH_SUCCESS = 'AUTH_SUCCESS';
 const Auth = {
     auth: false,
     loading: false,
     registerErrMsg: null,
     loginErrMsg: null,
-    type:null
+    type: null,
+    username: null,
+    _id: null,
 }
 //reducer
 export default function AuthReducer(state = Auth, action) {
 
     switch (action.type) {
-        case AUTH_SUCCESS: return{...state,auth:true,type:action.payload}
+        case AUTH_SUCCESS:
+            return {
+                ...state, auth: true, type: action.payload.type,
+                username: action.payload.username,
+                _id:action.payload._id
+            }
         case LOGIN_ERROR:
             return {...state, auth: false, loginErrMsg: action.errMsg}
         case LOGOUT:
@@ -37,30 +44,35 @@ export function login({username, password, cb}) {
     return function (dispatch) {
         axios.post('/user/login', {username, password}).then(function (res) {
             if (res.status === 200 && res.data.code === 0) {
-                const {type,avatar} = res.data.data;
-                dispatch(authSuccess(type));
-                cb(getRedirectPath({type,avatar}));
+                const {type, avatar, username, _id} = res.data.data;
+                dispatch(authSuccess({type, username, _id}));
+                cb(getRedirectPath({type, avatar}));
             } else {
+
+                dispatch(loginErr('用户名密码错误'))
                 cb();
-                return dispatch(loginErr('用户名密码错误'))
             }
 
         })
     }
 }
+
 function authSuccess(payload) {
-    return {type:AUTH_SUCCESS,payload}
+    return {type: AUTH_SUCCESS, payload}
 }
 
 function loginErr(errMsg) {
     return {type: LOGIN_ERROR, errMsg}
 }
+
 export function logout() {
     return {type: LOGOUT}
 }
+
 function registerError(msg) {
     return {type: REGISTER_ERROR, errMsg: msg}
 }
+
 export function register(option) {
     const {username, repeatPassword, password, type, cb} = option;
     if (username.replace(' ', '').length !== username.length) {
@@ -80,16 +92,16 @@ export function register(option) {
 
             if (res.status === 200 && res.data.code === 0) {
 
-
-                const type=res.data.data.type;
-                dispatch(authSuccess(type));
-                cb(getRedirectPath({type,avatar:null}));
+                const {type,_id,username} = res.data.data
+                dispatch(authSuccess({type,_id,username}));
+                cb(getRedirectPath({type, avatar: null}));
             }
         });
     }
 
 }
-export  const update=(option)=>(dispatch)=>{
-    axios.get('/info/userUpdate',{params:{...option}}).then(res=>{
+
+export const update = (option) => (dispatch) => {
+    axios.get('/info/userUpdate', {params: {...option}}).then(res => {
     })
 }

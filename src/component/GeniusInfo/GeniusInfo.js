@@ -11,6 +11,9 @@ export default class GeniusInfo extends Component {
     constructor(props){
         super(props);
         this.state={showModal:false};
+        this.handleAvatarClick=this.handleAvatarClick.bind(this);
+        this.handleSubmit=this.handleSubmit.bind(this);
+        this.handleValueChange=this.handleValueChange.bind(this);
     }
     handleValueChange(key, value) {
         this.props.onValueChange({key, value})
