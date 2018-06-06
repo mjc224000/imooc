@@ -14,25 +14,30 @@ const data = [
         path: '/geniusInfo',
         component: GeniusList,
         hide: 'Boss',
-        text:''
+        text:'',
+        className:'iconfont icon-shizi'
     },
     {
         title: 'Genius',
         path: '/bossInfo',
         component: BossContainer,
-        hide: 'Genius'
+        hide: 'Genius',
+        className:'iconfont icon-superhero-'
     },
     {
         title: "Personal Info",
         path: '/personalInfo',
         component: InfoCenter,
-        hide: ''
+        hide: '',
+        className:'iconfont icon-yonghuzhongxin'
     },
     {
         title: 'Chat',
         path: '/chat',
         component: Chat,
-        hide: ""
+        hide: "",
+        className:"iconfont icon-message"
+
     }
 ]
 class DashBoardContainer extends Component{

@@ -20,12 +20,13 @@ class BossContainer extends Component{
         this.handleUpdate=this.handleUpdate.bind(this);
     }
     componentDidMount(){
-          axios.get('/info/bossInfo').then((res)=>{
+        console.log(1);
+        axios.get('/info/bossInfo').then((res)=>{
                  this.setState({...res.data.data});
-             })
+            console.log(res);
+        })
     }
     handleValueChange({key, value}) {
-        console.log(key,value);
         this.setState({[key]: value});
     }
     handleUpdate(){
@@ -33,7 +34,7 @@ class BossContainer extends Component{
     }
     render(){
        if(this.props.isAuth){
-            return <Boss {...this.props} onUpdate={this.handleUpdate} onValueChange={this.handleValueChange} userInfo={{...this.state}}/>
+            return <Boss {...this.props} onUpdate={this.handleUpdate} onValueChange={this.handleValueChange} userInfo={{...this.state}} />
         }
         return(<Redirect to={'/login'}/>)
     }

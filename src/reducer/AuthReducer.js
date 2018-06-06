@@ -90,5 +90,4 @@ export  const update=(option)=>(dispatch)=>{
     axios.get('/info/bossUpdate',{params:{...option}}).then(res=>{
         console.log(res.data);
     })
-   console.log({...option})
 }
