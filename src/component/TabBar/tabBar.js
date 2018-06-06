@@ -2,40 +2,48 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import './iconfont.css'
 import './tabBar.css';
-var dataList=[{
-    text:'nmsl',
-    className:'iconfont icon-yonghuzhongxin',
-    path:'/geniusinfo'
+
+var dataList = [{
+    text: 'nmsl',
+    className: 'iconfont icon-yonghuzhongxin',
+    path: '/geniusinfo'
 }]
+
 class TabBar extends Component {
     static propTypes = {
-        onPress:PropTypes.func.isRequired,
-        navList:PropTypes.array.isRequired
+        onPress: PropTypes.func.isRequired,
+        navList: PropTypes.array.isRequired
 
     }
-    constructor(props){
+
+    constructor(props) {
         super(props)
-        this.handlePress=this.handlePress.bind(this);
+        this.handlePress = this.handlePress.bind(this);
+        this.state = {selectedIndex: null}
     }
 
-  handlePress(path){
+    handlePress(path, index) {
         this.props.onPress(path);
-  }
+        this.setState({selectedIndex: index});
+    }
 
     render() {
-       const navList=this.props.navList;
-        console.log(navList);
+        const navList = this.props.navList;
+        const selectedIndex = this.state.selectedIndex;
         return (
             <ul className={'tab-bar-footer'}>
 
-                {navList.map(v=>{
-                   return (<li onTouchStart={()=>this.handlePress(v.path)} onClick={()=>this.handlePress(v.path)}>
-                        <i className={v.className}></i>
-                        <span>{v.title}</span>
-                    </li>)
+                {navList.map((v, i) => {
+                    let selected = selectedIndex === i ? ' selected' : '';
+                    return (
+                        <li className={selected} onTouchStart={() => this.handlePress(v.path)} onClick={() => this.handlePress(v.path, i)}>
+                            <i className={v.className}></i>
+                            <span>{v.title}</span>
+                        </li>)
                 })}
-                </ul>
+            </ul>
         )
     }
 }
+
 export default TabBar

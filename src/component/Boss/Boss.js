@@ -5,11 +5,27 @@ import propTypes from 'prop-types';
 import imgurl from "./../img/logo.png"
 import {user} from "../../reducer/user";
 
+let avatarList = [];
+
+function _avartars() {
+    if(!avatarList.length){
+        for (var i = 1; i < 5; i++) {
+            avatarList.push('avatars-material-man-' + i + '.png');
+            avatarList.push('avatars-material-woman-' + i + '.png');
+        }
+        avatarList = avatarList.map((v) => {
+            return {icon: require('./../img/' + v)}
+        })
+    }
+    return avatarList;
+}
+
 export default class Boss extends Component {
     static propTypes = {
         onUpdate: propTypes.func,
         onValueChange: propTypes.func,
-        userInfo:propTypes.object
+        userInfo: propTypes.object,
+        avatarList: propTypes.array.isRequired
     }
 
     constructor(props) {
@@ -17,17 +33,12 @@ export default class Boss extends Component {
         this.state = {showModal: false};
         this.handleValueChange = this.handleValueChange.bind(this);
         this.handleAvatarClick = this.handleAvatarClick.bind(this);
-        this.handleModalTouch = this.handleModalTouch.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
     }
 
     handleValueChange(key, value) {
         this.props.onValueChange({key, value})
-    }
-
-    handleModalTouch(e) {
-        this.setState({avatar: e.icon})
     }
 
     handleAvatarClick() {
@@ -37,37 +48,16 @@ export default class Boss extends Component {
     handleSubmit() {
         this.props.onUpdate();
     }
-
-    _avartars() {
-        let avatarList = [];
-        if (this.props.avatars) {
-            avatarList = this.props.avatars
-        } else {
-            for (var i = 1; i < 5; i++) {
-                avatarList.push('avatars-material-man-' + i + '.png');
-                avatarList.push('avatars-material-woman-' + i + '.png');
-            }
-            avatarList = avatarList.map((v) => {
-                return {icon: require('./../img/' + v)}
-            })
-        }
-        return avatarList;
-    }
-
     render() {
-        const {username, salary, company, position, positionDesc} = this.props.userInfo;
-        console.log(this.props.userInfo);
+        const {username, salary, company, position, positionDesc, avatar} = this.props.userInfo;
         return (<div>
-            <NavBar leftContent={<Icon type={'left'} onClick={() => this.props.history.go(-1)}/>}>
-                Complete information
-            </NavBar>
             <List>
                 <WingBlank><Modal visible={this.state.showModal}
                                   transparent
                                   wrapProps={{onTouchStart: () => this.setState({'showModal': false})}}>
-                    <Grid data={this._avartars()}
+                    <Grid data={_avartars()}
                           columnNum={3}
-                          onClick={this.handleModalTouch}
+                          onClick={(el) => this.handleValueChange('avatar', el.icon)}
                           renderItem={dataItem => (
                               <div style={{border: '1px solid sliver'}}>
                                   <img src={dataItem.icon} style={{width: '75px', height: '75px'}} alt=""/>
@@ -85,7 +75,7 @@ export default class Boss extends Component {
                             <div className='info'><Link to={'/companyInfo'}> <span>company info </span></Link></div>
                         </div>
                         <div className='user-avatar-avatar' onClick={this.handleAvatarClick}><img
-                            src={this._avartars()[0].icon}/></div>
+                            src={avatar}/></div>
                     </div>
                 </WingBlank>
                 <WingBlank> <InputItem value={position}

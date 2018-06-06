@@ -33,6 +33,7 @@ router.get('/bossUpdate', function (req, res) {
 router.get('/bossInfo', function (req, res) {
     const instance = _User();
     if (instance) {
+
         const {salary, company, position, positionDesc, avatar, username} = instance;
         return res.json({code: 0, data: {salary, company, position, positionDesc, avatar, username}});
     }
