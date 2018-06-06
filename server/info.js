@@ -20,12 +20,12 @@ router.get('/bossUpdate', function (req, res) {
     const {position, positionDesc, company, salary, avatar} = req.query;
     AppUser.update({username: _User().username},
         {position, positionDesc, company, salary, avatar},
-        function (err, instance) {
+        function (err) {
             if (err) {
                 return res.json({code: 1, errMsg: 'server error'})
             } else {
-                const {salary, company, position, positionDesc, avatar, username} = instance;
-                _User(instance);
+                const {salary, company, position, positionDesc, avatar, username} = req.query;
+                _User({position, positionDesc, company, salary, avatar});
                 return res.json({code: 0, data: {salary, company, position, positionDesc, avatar, username}})
             }
         })
