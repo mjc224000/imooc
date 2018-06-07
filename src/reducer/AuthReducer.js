@@ -54,6 +54,7 @@ export function login({username, password}) {
         return {type: LOGIN_ERROR, errMsg: 'username and password can not be empty'}
     }
     return function (dispatch) {
+        dispatch({type: BEGIN_AXIOS});
         axios.post('/user/login', {username, password}).then(function (res) {
             if (res.status === 200 && res.data.code === 0) {
                 const {type, avatar, username, _id} = res.data.data;
@@ -91,7 +92,7 @@ export function axiosFinish() {
 }
 
 export function register(option) {
-    const {username, repeatPassword, password, type, cb} = option;
+    const {username, repeatPassword, password, type} = option;
     if (username.replace(' ', '').length !== username.length) {
 
         return registerError('username cannot contain space');
@@ -116,5 +117,10 @@ export function register(option) {
     }
 
 }
+//不需要写里面的啊 大哥
+export const update = (option) => (dispatch) => {
+    axios.get('/info/userUpdate',{params:{...option}}).then(res=>{
 
-export const update = (option) => (dispatch) => {}
+
+    })
+}

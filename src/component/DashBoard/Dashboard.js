@@ -3,48 +3,7 @@ import {TabBar, NavBar, Icon} from 'antd-mobile';
 import MyTabBar from './../TabBar/tabBar';
 import {Route, Link, withRouter} from 'react-router-dom';
 import  PropTypes from 'prop-types';
-function Boss() {
-    return (<h1>Boss</h1>)
-}
 
-function Genius() {
-    return (<h1>Genius </h1>)
-}
-
-function PersonInfo() {
-    return (<h1>PersonInfo </h1>)
-}
-
-function Chat() {
-    return (<h1>Chat</h1>)
-}
-
-const data = [
-    {
-        title: 'Boss',
-        path: '/geniusInfo',
-        component: Genius,
-        hide: 'Boss'
-    },
-    {
-        title: 'Genius',
-        path: '/bossInfo',
-        component: Boss,
-        hide: 'Genius'
-    },
-    {
-        title: "Personal Info",
-        path: '/personalInfo',
-        component: PersonInfo,
-        hide: ''
-    },
-    {
-        title: 'Chat',
-        path: '/chat',
-        component: Chat,
-        hide: ""
-    }
-]
 export default class TabBarExample extends React.Component {
     static propTypes={
      navList:PropTypes.array.isRequired
@@ -64,7 +23,7 @@ export default class TabBarExample extends React.Component {
     }
 
     render() {
-        var navList = this.props.navList || data;
+        var navList = this.props.navList || [];
         return (
             <div style={this.state.fullScreen ? {
                 position: 'fixed',

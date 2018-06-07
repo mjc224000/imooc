@@ -1,6 +1,6 @@
 import React,{Component}from 'react'
 import {Toast} from 'antd-mobile';
-import {connect} from 'redux-thunk';
+import {connect} from 'react-redux';
 const mapStateToProps=(state)=>{
     return {loading:state.loading}
 }

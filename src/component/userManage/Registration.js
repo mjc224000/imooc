@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-import {List, InputItem, WhiteSpace, Button, Toast, WingBlank, Radio} from 'antd-mobile';
+import {List, InputItem, WhiteSpace, Button, WingBlank, Radio} from 'antd-mobile';
 import {Link,Redirect} from 'react-router-dom';
-import propTypes from 'prop-types';
-import {register} from "../../reducer/AuthReducer";
 import imgURL from './../img/logo.png';
 ///http://react-component.github.io/form/examples/server-validate.html
 const RadioItem = Radio.RadioItem;
@@ -21,17 +19,10 @@ export class Registration extends Component {
 
         this.handleValueChange = this.handleValueChange.bind(this);
         this.handleSubmit=this.handleSubmit.bind(this);
-        this._redirectTo=this._redirectTo.bind(this);
-    }
 
-_redirectTo(url){
-        Toast.hide();
-        if(url)
-        this.props.history.push(url);
-}
+    }
     handleSubmit = () => {
-          Toast.loading('loading',60)
-        this.props.register({...this.state,cb:this._redirectTo});
+        this.props.register({...this.state});
     }
 
     handleValueChange(key, value) {
@@ -42,7 +33,7 @@ _redirectTo(url){
  const {type}=this.state;
  const errorMsg=this.props.errorMsg||this.state.errorMsg;
         return (<List>
-
+            {this.props.redirectTo? <Redirect to={this.props.redirectTo}/>:null}
             <WingBlank>
                 <div style={{textAlign: 'center'}}><img className='logo' src={imgURL}/></div>
             </WingBlank>

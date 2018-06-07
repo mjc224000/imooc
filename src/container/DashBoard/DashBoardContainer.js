@@ -6,7 +6,7 @@ import GeniusList from './../GeniusList/GeniusList';
 import BossContainer from './../BossContainer/BossContainer';
 import GeniusContainer from './../GeniusInfo/GeniusInfo';
 import ChatRoom from './../ChatRoom/ChatRoom';
-
+import InfoCenter from './../InfoCenter/InfoCenter';
 import axios from 'axios';
 
 function BossList() {
@@ -49,6 +49,13 @@ const data = [
         hide: 'genius',
         component: BossContainer,
         path: '/bossInfo',
+        className: 'iconfont icon-yonghuzhongxin',
+        title:'用户中心'
+    },
+    {
+        hide: '',
+        component: InfoCenter,
+        path: '/InfoCenter',
         className: 'iconfont icon-yonghuzhongxin',
         title:'用户中心'
     }
