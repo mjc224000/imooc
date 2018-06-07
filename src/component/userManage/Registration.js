@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {List, InputItem, WhiteSpace, Button, Toast, WingBlank, Radio} from 'antd-mobile';
 import {Link,Redirect} from 'react-router-dom';
-import {createForm, formShape} from 'rc-form';
 import propTypes from 'prop-types';
 import {register} from "../../reducer/AuthReducer";
 import imgURL from './../img/logo.png';

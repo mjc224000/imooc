@@ -5,11 +5,9 @@ import DashBoard from './../../component/DashBoard/Dashboard';
 import GeniusList from './../GeniusList/GeniusList';
 import BossContainer from './../BossContainer/BossContainer';
 import GeniusContainer from './../GeniusInfo/GeniusInfo';
-import ChatRoom from './../ChatRoom/ChatRoom'
+import ChatRoom from './../ChatRoom/ChatRoom';
+
 import axios from 'axios';
-function Chat() {
-    return <h2> Chat</h2>
-}
 
 function BossList() {
     return <h2> BossList</h2>
@@ -65,7 +63,6 @@ class DashBoardContainer extends Component {
     handlePress(url) {
         this.props.history.push(url);
     }
-
     render() {
         let navList = data.filter((v) => v.hide !== this.props.type);
 
@@ -78,6 +75,6 @@ class DashBoardContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return {isAuth: state.auth, type: state.type}
+    return {isAuth: state.auth, type: state.type,loading:state.loading}
 }
 export default withRouter(connect(mapStateToProps)(DashBoardContainer));
