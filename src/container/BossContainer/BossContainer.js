@@ -19,10 +19,9 @@ class BossContainer extends Component{
         this.handleUpdate=this.handleUpdate.bind(this);
     }
     componentDidMount(){
-        console.log(1);
-        axios.get('/info/userInfo').then((res)=>{
+        axios.get('/info/userInfo',{params:{_id:this.props._id}}).then((res)=>{
                  this.setState({...res.data.data});
-            console.log(res);
+
         })
     }
     handleValueChange({key, value}) {
@@ -42,5 +41,5 @@ function mapDispatchToProps(dispatch) {
     return {update:(option)=>dispatch(update(option)) }
 }
 export default connect(function (state) {
-    return{...state,isAuth:state.auth}
+    return{...state,isAuth:state.auth,_id:state._id}
 },mapDispatchToProps)(BossContainer)

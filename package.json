@@ -18,7 +18,9 @@
     "axios": "latest",
     "body-parser":"^1.18.3",
     "utility": "^1.13.1",
-    "cookie-parser": "^1.4.3"
+    "cookie-parser": "^1.4.3",
+    "socket.io": "^2.1.1",
+    "socket.io-client": "^2.1.1"
   },
   "scripts": {
     "start": "react-scripts start",

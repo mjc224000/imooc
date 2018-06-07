@@ -4,7 +4,8 @@ import {Redirect, withRouter} from 'react-router-dom'
 import DashBoard from './../../component/DashBoard/Dashboard';
 import GeniusList from './../GeniusList/GeniusList';
 import BossContainer from './../BossContainer/BossContainer';
-import GeniusContainer from './../GeniusInfo/GeniusInfo'
+import GeniusContainer from './../GeniusInfo/GeniusInfo';
+import ChatRoom from './../ChatRoom/ChatRoom'
 import axios from 'axios';
 function Chat() {
     return <h2> Chat</h2>
@@ -40,7 +41,7 @@ const data = [
     {
         title: 'Chat',
         path: '/chat',
-        component: Chat,
+        component: ChatRoom,
         hide: "",
         className: "iconfont icon-message",
         title:'消息中心'

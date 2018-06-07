@@ -17,25 +17,27 @@ router.use(function (req, res, next) {
 })
 
 router.get('/userUpdate', function (req, res) {
-    const {position, positionDesc, company, salary, avatar,resume} = req.query;
-    AppUser.update({username: _User().username},
+    const {position, positionDesc, company, salary, avatar,resume,_id} = req.query;
+    console.log(_id);
+    AppUser.update({_id},
         {position, positionDesc, company, salary, avatar,resume},
         function (err) {
             if (err) {
                 return res.json({code: 1, errMsg: 'server error'})
             } else {
-                const {salary, company, position, positionDesc, avatar, username,resume} = req.query;
-                return res.json({code: 0, data: {salary, company, position, positionDesc, avatar, username}})
+                return res.json({code: 0, data: {salary, company, position, positionDesc, avatar}})
             }
         })
 })
 router.get('/userInfo', function (req, res) {
     const _id=req.query['_id'];
+    console.log(_id);
     AppUser.findOne({_id},function (err,instance) {
         if(err){
             return res.json({code:1,errMsg:'error'});
         }else {
-           return res.json({code:0,data:instance})
+
+            return res.json({code:0,data:instance})
         }
     })
 

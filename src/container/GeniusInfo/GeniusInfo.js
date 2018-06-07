@@ -23,15 +23,13 @@ class GeniusInfoContainer extends Component{
             _id:this.props._id
             }}).then((res)=>{
             this.setState({...res.data.data});
-          console.log({...res.data.data} )
-            console.log(res);
         })
     }
     handleValueChange({key, value}) {
         this.setState({[key]: value});
     }
     handleUpdate(){
-        this.props.update({...this.state})
+        this.props.update({...this.state,_id:this.props._id})
     }
     render(){
         if(this.props.isAuth){
