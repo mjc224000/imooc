@@ -9,7 +9,6 @@ class Login extends Component {
         this.state = {
             username: null,
             password: '',
-            loading:true
         }
         this.handleOnchange=this.handleOnchange.bind(this);
         this._callback=this._callback.bind(this);
@@ -21,20 +20,16 @@ class Login extends Component {
             this.setState({username:username.toString()});
         }
     }
-    _callback(url){
-        Toast.hide();
-        if(url){
-            console.log(url);
-            this.props.history.push(url);
-        }
-    }
+      componentWillUpdate(){
+          console.log(this.props.history.location);
+          const history=this.props.history;
 
+      }
     handleLoginClick(e) {
-        Toast.loading('loading',60);
-        let cb=this._callback;
+
         const {username, password} = this.state;
         localStorage.setItem('username',username);
-        this.props.handleLogin({username, password,cb});
+        this.props.handleLogin({username, password});
     }
    handleOnchange(key,val){
         this.setState({[key]:val});
