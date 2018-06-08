@@ -44,7 +44,7 @@ export default class Boss extends Component {
         this.props.onUpdate();
     }
     render() {
-        const {username, salary, company, position, positionDesc, avatar} = this.props.userInfo;
+        const {username, salary, company, position, positionDesc, avatar} = this.props;
         return (<div>
             <List>
                 <WingBlank><Modal visible={this.state.showModal}

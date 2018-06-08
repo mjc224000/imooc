@@ -25,17 +25,15 @@ export default function AuthReducer(state = Auth, action) {
     switch (action.type) {
         case AUTH_SUCCESS:
             return {
-                ...state, auth: true,
-                type: action.payload.type,
-                username: action.payload.username,
-                _id: action.payload._id,
+                ...state, auth: true,...action.payload,
                 loading:false,
                 redirectTo:getRedirectPath({type:action.payload.type,avatar:action.payload.avatar})
             }
         case LOGIN_ERROR:
             return {...state, auth: false, loginErrMsg: action.errMsg}
         case LOGOUT:
-            return {...state, auth: false};
+            console.log(12345);
+            return {...Auth, auth: false};
         case REGISTER_ERROR:
             return {...state, auth: false, registerErrMsg: action.errMsg};
         case BEGIN_AXIOS:
@@ -59,8 +57,7 @@ export function login({username, password}) {
         dispatch({type: BEGIN_AXIOS});
         axios.post('/user/login', {username, password}).then(function (res) {
             if (res.status === 200 && res.data.code === 0) {
-                const {type, avatar, username, _id} = res.data.data;
-                dispatch(authSuccess({type, username, _id,avatar}));
+                dispatch(authSuccess({...res.data.data}));
             } else {
                 dispatch(loginErr('用户名密码错误'))
             }
@@ -94,7 +91,7 @@ export function axiosFinish() {
 }
 
 export function register(option) {
-    const {username, repeatPassword, password, type} = option;
+    const {username, repeatPassword, password} = option;
     if (username.replace(' ', '').length !== username.length) {
 
         return registerError('username cannot contain space');
@@ -112,8 +109,7 @@ export function register(option) {
         axios.post('/user/register', {...option}).then(res => {
 
             if (res.status === 200 && res.data.code === 0) {
-                const {type, _id, username} = res.data.data
-                dispatch(authSuccess({type, _id, username}));
+                dispatch(authSuccess({...res.data.data}));
             }
         });
     }
@@ -123,6 +119,6 @@ export function register(option) {
 export const update = (option) => (dispatch) => {
     dispatch(beginAxios());
     axios.get('/info/userUpdate',{params:{...option}}).then(res=>{
-
+       dispatch({type:UPDATE,payload:res.data.data})
     })
 }

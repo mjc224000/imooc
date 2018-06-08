@@ -52,11 +52,11 @@ class Login extends Component {
                     <div className='validate'>{errorMsg}</div>
                 </WingBlank>
                 <WingBlank> <InputItem value={this.state.username ? this.state.username : null}
-                                       onChange={(val) => this.handleOnchange('username', val)}>userName: </InputItem>
+                                       onChange={(val) => this.handleOnchange('username', val)}>username: </InputItem>
                 </WingBlank>
                 <WhiteSpace/>
                 <WingBlank><InputItem type={'password'}
-                                      onChange={(val) => this.handleOnchange('password', val)}>passWord: </InputItem></WingBlank>
+                                      onChange={(val) => this.handleOnchange('password', val)}>password: </InputItem></WingBlank>
                 <WhiteSpace/>
                 <WingBlank> <Button type={'primary'}
                                     onClick={this.handleLoginClick.bind(this)}>{'Login'}</Button></WingBlank>

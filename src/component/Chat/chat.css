@@ -1,0 +1,24 @@
+.chat{
+    display: flex; flex-flow: column; min-height: 83vh;
+}
+
+.chat .main{
+    flex: 1;
+}
+.chat-footer{
+  display: flex;
+    justify-content: space-around;
+ }
+.chat-footer-input{
+    flex: 0 0 70%;
+}
+.chat-footer-emoji{
+    background: #1da7ff;
+    flex: 0 0 20%;
+}
+.chat-footer-emoji span{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #1da7ff;
+}

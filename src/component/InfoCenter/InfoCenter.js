@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import './infoCenter.css';
-import {Result, Icon, WhiteSpace, List} from 'antd-mobile';
-
+import {Result, WhiteSpace, List,WingBlank,Button} from 'antd-mobile';
 
 export default class InfoCenter extends Component {
     constructor(props) {
@@ -15,42 +14,35 @@ export default class InfoCenter extends Component {
             salary: '',
             positionDesc:''
         }
+        this.handleLogout=this.handleLogout.bind(this);
     }
+    handleLogout(){
 
-    handleKeyDown() {
-        const {myIndex} = this.state;
-        this.setState({});
+        this.props.onLogout();
     }
 
     componentDidMount() {
-        axios.get('/info/userInfo',{params:{
-            _id:this.props._id
-            }}).then(res => {
-            this.setState({...res.data.data})
-        })
     }
     render() {
         const Item = List.Item,
             Brief = Item.Brief;
-
-    const {type,positionDesc,salary}=this.state;
+        const {type,positionDesc,salary,avatar,username,company}=this.props;
     var desc=positionDesc.split('\n');
-
     const myImg = src => <img src={src} className="spe am-icon am-icon-md" alt=""/>;
         return (<div className="info-center">
             <Result
-                img={myImg(this.state.avatar)  }
-                title={this.state.username}
-                message={<div>{this.state.company}</div>}
+                img={myImg(avatar)  }
+                title={username}
+                message={<div>{company}</div>}
             />
-            <List renderHeader={() =>this.props.type==="boss"? '职位描述':'个人简介'}>
+            <List renderHeader={() =>type==="boss"? '职位描述':'个人简介'}>
                 {type==='boss'?<Item>{`职位薪资: ${salary}`} </Item>:null }
                 <Item>
-                    {desc.map(v=><Brief>{v}</Brief> )}
+                    {desc.map((v,i)=><Brief key={i}>{v}</Brief> )}
                 </Item>
             </List>
             <WhiteSpace/>
-
+            <WingBlank><Button type={'primary'} onClick={this.handleLogout}>Logout</Button></WingBlank>
         </div>);
 
     }

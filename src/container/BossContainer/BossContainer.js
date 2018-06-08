@@ -32,7 +32,7 @@ class BossContainer extends Component{
     }
     render(){
        if(this.props.isAuth){
-            return <Boss {...this.props} onUpdate={this.handleUpdate} onValueChange={this.handleValueChange} userInfo={{...this.state}} />
+            return <Boss {...this.props} onUpdate={this.handleUpdate} onValueChange={this.handleValueChange}  />
         }
         return(<Redirect to={'/login'}/>)
     }

@@ -7,6 +7,7 @@ import BossContainer from './../BossContainer/BossContainer';
 import GeniusContainer from './../GeniusInfo/GeniusInfo';
 import ChatRoom from './../ChatRoom/ChatRoom';
 import InfoCenter from './../InfoCenter/InfoCenter';
+import Chat from './../ChatContainer/chat';
 import axios from 'axios';
 
 function BossList() {
@@ -39,7 +40,7 @@ const data = [
     {
         title: 'Chat',
         path: '/chat',
-        component: ChatRoom,
+        component: Chat,
         hide: "",
         className: "iconfont icon-message",
         title:'消息中心'
@@ -74,6 +75,7 @@ class DashBoardContainer extends Component {
         let navList = data.filter((v) => v.hide !== this.props.type);
 
         if (!this.props.isAuth) {
+            console.log(this.props);
             return (<Redirect to={'/login'}></Redirect>)
         }
         return <DashBoard {...this.props} navList={navList} onPress={this.handlePress}/>

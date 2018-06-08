@@ -27,9 +27,10 @@ export default class TabBarExample extends React.Component {
         return (
             <div style={this.state.fullScreen ? {
                 position: 'fixed',
-                height: '100%',
+               height:'100vh',
                 width: '100%',
-                top: 0
+                top: 0,
+
             } : {height: 400}}>
 
                 <NavBar leftContent={<Icon type={'left'} onClick={() => this.props.history.go(-1)}/>}>
@@ -38,7 +39,7 @@ export default class TabBarExample extends React.Component {
                 {
                     navList.map(v => {
                     if (1) {
-                        return <Route path={v.path} component={v.component}></Route>
+                        return <Route key={v.path} path={v.path} component={v.component}></Route>
                     }
                 })}
                 <MyTabBar navList={this.props.navList} onPress={this.handleTabPress}/>
