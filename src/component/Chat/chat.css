@@ -5,11 +5,16 @@
 .chat .main{
     flex: 1;
 }
+.chat .chat-list{
+   min-height: 76vh;
+}
 .chat-footer{
+    min-height: 6vh;
   display: flex;
     justify-content: space-around;
  }
 .chat-footer-input{
+    height: 100%;
     flex: 0 0 70%;
 }
 .chat-footer-emoji{
