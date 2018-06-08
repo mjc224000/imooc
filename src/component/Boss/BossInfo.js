@@ -80,11 +80,15 @@ export default class Boss extends Component {
                 <WingBlank> <InputItem value={salary}
                                        onChange={(value) => this.handleValueChange('salary', value)}>职位薪资：</InputItem></WingBlank>
                 <WhiteSpace/>
-                <WingBlank><TextareaItem
-                    value={positionDesc}
-                    title={'职位描述：'}
-                    autoHeight
-                    row={3} onChange={(value) => this.handleValueChange('positionDesc', value)}/> </WingBlank>
+                <WingBlank>
+                    <div  style={{position: 'relative', overflow: 'auto', maxHeight: '50%'}}>
+                        <TextareaItem
+                            value={positionDesc}
+                            title={'职位描述：'}
+                            count={140}
+                            rows={7} onChange={(value) => this.handleValueChange('positionDesc', value)}/>
+                    </div>
+                  </WingBlank>
                 <WingBlank> <Button onClick={this.handleSubmit} type={'primary'}>提交</Button></WingBlank>
             </List>
         </div>)

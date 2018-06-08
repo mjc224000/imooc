@@ -42,7 +42,9 @@ export default function AuthReducer(state = Auth, action) {
             return {...state, loading: true};
         case AXIOS_FINISH:
             return {...state, loading: false};
-        case REDIRECT_TO :{return {...state,redirectTo:''}}
+        case REDIRECT_TO :{return {...state,redirectTo:''}};
+        case UPDATE:
+            return{...state,loading:false,...action.payload}
         default :
             return state
     }
@@ -119,8 +121,8 @@ export function register(option) {
 }
 //不需要写里面的啊 大哥
 export const update = (option) => (dispatch) => {
+    dispatch(beginAxios());
     axios.get('/info/userUpdate',{params:{...option}}).then(res=>{
-
 
     })
 }
