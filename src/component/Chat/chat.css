@@ -1,12 +1,12 @@
 .chat{
-    display: flex; flex-flow: column; min-height: 83vh;
+    display: flex; flex-flow: column;
+    height: 100%;
+    overflow: auto;
 }
 
-.chat .main{
-    flex: 1;
-}
+
 .chat .chat-list{
-   min-height: 76vh;
+   flex :1;
 }
 .chat-footer{
     min-height: 6vh;
@@ -15,7 +15,10 @@
  }
 .chat-footer-input{
     height: 100%;
-    flex: 0 0 70%;
+    flex: 0 0 80%;
+}
+.chat-footer .am-input-extra{
+
 }
 .chat-footer-emoji{
     background: #1da7ff;

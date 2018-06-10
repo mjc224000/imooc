@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import './infoCenter.css';
-import {Result, WhiteSpace, List,WingBlank,Button} from 'antd-mobile';
+import {Button, List, Result, WhiteSpace, WingBlank} from 'antd-mobile';
 
 export default class InfoCenter extends Component {
     constructor(props) {
@@ -12,33 +11,36 @@ export default class InfoCenter extends Component {
             username: '',
             position: '',
             salary: '',
-            positionDesc:''
+            positionDesc: ''
         }
-        this.handleLogout=this.handleLogout.bind(this);
+        this.handleLogout = this.handleLogout.bind(this);
     }
-    handleLogout(){
+
+    handleLogout() {
 
         this.props.onLogout();
     }
 
     componentDidMount() {
     }
+
     render() {
         const Item = List.Item,
             Brief = Item.Brief;
-        const {type,positionDesc,salary,avatar,username,company}=this.props;
-    var desc=positionDesc.split('\n');
-    const myImg = src => <img src={src} className="spe am-icon am-icon-md" alt=""/>;
+        const {type, positionDesc, salary, avatar, username, company, resume} = this.props;
+        var desc = positionDesc || resume;
+        desc = desc && desc.split('\n') || [];
+        const myImg = src => <img src={src} className="spe am-icon am-icon-md" alt=""/>;
         return (<div className="info-center">
             <Result
-                img={myImg(avatar)  }
+                img={myImg(avatar)}
                 title={username}
                 message={<div>{company}</div>}
             />
-            <List renderHeader={() =>type==="boss"? '职位描述':'个人简介'}>
-                {type==='boss'?<Item>{`职位薪资: ${salary}`} </Item>:null }
+            <List renderHeader={() => type === "boss" ? '职位描述' : '个人简介'}>
+                {type === 'boss' ? <Item>{`职位薪资: ${salary||0}`} </Item> : null}
                 <Item>
-                    {desc.map((v,i)=><Brief key={i}>{v}</Brief> )}
+                    {desc.map((v, i) => <Brief key={i}>{v}</Brief>)}
                 </Item>
             </List>
             <WhiteSpace/>

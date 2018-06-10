@@ -19,11 +19,9 @@ class GeniusInfoContainer extends Component{
         this.handleUpdate=this.handleUpdate.bind(this);
     }
     componentDidMount(){
-        axios.get('/info/userInfo',{params:{
-            _id:this.props._id
-            }}).then((res)=>{
-            this.setState({...res.data.data});
-        })
+        const{company,position,resume,salary,avatar}=this.props;
+        this.setState({company,position,resume,salary,avatar});
+
     }
     handleValueChange({key, value}) {
         this.setState({[key]: value});
@@ -41,6 +39,6 @@ class GeniusInfoContainer extends Component{
 function mapDispatchToProps(dispatch) {
     return {update:(option)=>dispatch(update(option)) }
 }
-export default connect(function (state) {
+export default connect(function ({AuthReducer:state}) {
     return{...state,isAuth:state.auth,_id:state._id}
 },mapDispatchToProps)(GeniusInfoContainer)

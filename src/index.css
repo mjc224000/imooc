@@ -1,4 +1,4 @@
-body {
+* {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
@@ -7,7 +7,14 @@ body {
 .validate {
     color: red;
 }
-
+.header{
+    flex:0 0 10vh;
+}
+.main{
+    flex: 1;
+    max-height: 80vh;
+    overflow: auto;
+}
 .user-avatar {
     min-height: 100px;
     position: relative;

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {getRedirectPath} from './util';
+import {_axios} from "./util";
 
 const LOGIN_ERROR = 'LOGIN_ERROR';
 const LOGOUT = 'LOGOUT';
@@ -54,15 +55,14 @@ export function login({username, password}) {
         return {type: LOGIN_ERROR, errMsg: 'username and password can not be empty'}
     }
     return function (dispatch) {
-        dispatch({type: BEGIN_AXIOS});
-        axios.post('/user/login', {username, password}).then(function (res) {
-            if (res.status === 200 && res.data.code === 0) {
-                dispatch(authSuccess({...res.data.data}));
-            } else {
-                dispatch(loginErr('用户名密码错误'))
-            }
 
-        })
+     _axios.post('/user/login', {username, password}).then((res)=>
+         {
+             if(res.status===200){
+                 dispatch(authSuccess({...res.data.data}));
+             }
+         }
+     )
     }
 }
 
@@ -105,8 +105,8 @@ export function register(option) {
         return registerError('the both input password must be consistent');
     }
     return function (dispatch) {
-        dispatch({type: BEGIN_AXIOS})
-        axios.post('/user/register', {...option}).then(res => {
+
+        _axios.post('/user/register', {...option}).then(res => {
 
             if (res.status === 200 && res.data.code === 0) {
                 dispatch(authSuccess({...res.data.data}));
@@ -118,7 +118,7 @@ export function register(option) {
 //不需要写里面的啊 大哥
 export const update = (option) => (dispatch) => {
     dispatch(beginAxios());
-    axios.get('/info/userUpdate',{params:{...option}}).then(res=>{
+    _axios.get('/info/userUpdate',{params:{...option}}).then(res=>{
        dispatch({type:UPDATE,payload:res.data.data})
     })
 }

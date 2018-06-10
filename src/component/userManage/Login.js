@@ -40,9 +40,7 @@ class Login extends Component {
     render() {
 
         const errorMsg = this.props.errMsg;
-       console.log(this.props);
         return (
-
             <List>
                 {  this.props.redirectTo?<Redirect to={this.props.redirectTo}/>:null}
                 <WingBlank>

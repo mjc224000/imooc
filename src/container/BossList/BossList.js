@@ -1,11 +1,8 @@
 import BossList from './../../component/BossList/BossList';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 import React, {Component} from 'react';
 import {_axios} from "../../reducer/util";
-
-const mapStateToProps = ({AuthReducer: state}) => {
-    return {...state}
-}
 
 class BossListContainer extends Component {
     constructor(props) {
@@ -30,4 +27,8 @@ class BossListContainer extends Component {
     }
 }
 
-export default connect(mapStateToProps)(BossListContainer);
+const mapStateToProps = ({AuthReducer: state}) => {
+    return {...state};
+};
+
+export default  withRouter( connect(mapStateToProps)(BossListContainer) );

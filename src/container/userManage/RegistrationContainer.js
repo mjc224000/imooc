@@ -4,7 +4,7 @@ import Registration from './../../component/userManage/Registration';
 function mapDispatchToProps(dispatch) {
     return{register:option=>dispatch(register(option)) }
 }
-function mapStateToProps(state) {
+function mapStateToProps({AuthReducer:state}) {
     return{...state,errorMsg:state.registerErrMsg }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Registration)

@@ -1,9 +1,9 @@
 const utils = require('utility');
 const express = require('express');
-const getToken=require('./utils') .getToken;
-const  cookieParser = require('cookie-parser');
+const getToken = require('./utils').getToken;
+const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const AppUser = require('./model');
+const AppUser = require('./model').AppUser;
 const router = express.Router();
 // 该路由使用的中间件
 router.use(bodyParser.json());
@@ -17,21 +17,24 @@ router.post('/login', function (req, res) {
     const {username, password} = req.body;
     const md5Password = utils.md5(password);
     //findone 的第二个字段是显示条件
-    AppUser.findOne({username},{'password':0}, function (err, instance ){
+    AppUser.findOne({username}, {'password': 0}, function (err, instance) {
         if (err) {
             res.json({code: 1, msg: 'server error'});
         } else {
-            if(!instance){
-                return res.json({code:1,msg:'wrong username or password'})
+            if (!instance) {
+                return res.json({code: 1, msg: 'wrong username or password'})
             }
             var userPassword = instance.password;
-            if (userPassword ===md5Password);
-            {  res.cookie('Token',getToken(),{ expires: new Date(Date.now() + 900000), httpOnly: true })
+            if (userPassword === md5Password) ;
+            {
+                res.cookie('Token',instance._id, {expires: new Date(Date.now() + 900000), httpOnly: true})
 
-                return   res.json({code: 0, msg: "login success",data:instance,Token:getToken()})
+                setTimeout(function () {
+                    res.json({code: 0, msg: "register success", data: instance});
+                }, 0)
 
             }
-    }
+        }
     })
 
 })
@@ -48,20 +51,22 @@ router.post('/register', function (req, res) {
             res.json({code: 1, msg: 'the username already exists'});
             return
         }
-        var AppUserInstance = new AppUser({username, password: utils.md5(password), type,avatar:''});
+        var AppUserInstance = new AppUser({username, password: utils.md5(password), type, avatar: ''});
         AppUserInstance.save(function (err, instance) {
             if (err) {
                 res.json({code: 1, msg: 'server error'})
             } else {
 
-                res.cookie('Token',getToken(),{ expires: new Date(Date.now() + 900000), httpOnly: true })
-                res.json({code: 0, msg: "register success",data:instance});
+                res.cookie('Token',instance._id, {expires: new Date(Date.now() + 900000), httpOnly: true})
+                setTimeout(function () {
+                    res.json({code: 0, msg: "register success", data: instance});
+                }, 3000)
             }
 
         });
     })
 });
-router.get('/all', function (req , res) {
+router.get('/all', function (req, res) {
     AppUser.find({}, function (err, instances) {
         res.json(instances);
     })

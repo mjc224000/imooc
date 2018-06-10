@@ -5,6 +5,7 @@ import DashBoard from './../../component/DashBoard/Dashboard';
 import GeniusList from './../GeniusList/GeniusList';
 import BossContainer from './../BossContainer/BossContainer';
 import GeniusContainer from './../GeniusInfo/GeniusInfo';
+import BossListContainer from './../BossList/BossList';
 import ChatRoom from './../ChatRoom/ChatRoom';
 import InfoCenter from './../InfoCenter/InfoCenter';
 import Chat from './../ChatContainer/chat';
@@ -18,7 +19,7 @@ function BossList() {
 const data = [
     {
         path: '/bossList',
-        component: BossList,
+        component: BossListContainer,
         hide: 'boss',
         className: 'iconfont icon-shizi',
         title:'Boss列表'
@@ -39,7 +40,7 @@ const data = [
     },
     {
         title: 'Chat',
-        path: '/chat',
+        path: '/chat/:id',
         component: Chat,
         hide: "",
         className: "iconfont icon-message",
@@ -83,7 +84,7 @@ class DashBoardContainer extends Component {
 
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ( {AuthReducer:state}) => {
     return {isAuth: state.auth, type: state.type,loading:state.loading}
 }
 export default withRouter(connect(mapStateToProps)(DashBoardContainer));

@@ -1,7 +1,6 @@
 .tab-bar-footer {
+    flex: 0 0 10vh;
     padding: 0;
-    position: fixed;
-    bottom: 0;
     width: 100%;
     list-style: none;
     display: flex;

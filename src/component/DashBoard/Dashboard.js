@@ -30,18 +30,22 @@ export default class TabBarExample extends React.Component {
                height:'100vh',
                 width: '100%',
                 top: 0,
+                display:'flex',
+             flexFlow:'column',
+
 
             } : {height: 400}}>
 
-                <NavBar leftContent={<Icon type={'left'} onClick={() => this.props.history.go(-1)}/>}>
+                <NavBar className={'header'} leftContent={<Icon type={'left'} onClick={() => this.props.history.go(-1)}/>}>
                     {11}
                 </NavBar>
-                {
+                <div className={'main'}>
+                    {
                     navList.map(v => {
-                    if (1) {
-                        return <Route key={v.path} path={v.path} component={v.component}></Route>
-                    }
-                })}
+                            return <Route key={v.path} path={v.path} component={v.component}></Route>
+                    })}
+                </div>
+
                 <MyTabBar navList={this.props.navList} onPress={this.handleTabPress}/>
 
             </div>

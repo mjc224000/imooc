@@ -1,3 +1,4 @@
+const Chat=require('./model').Chat;
 const userRouter=require('./user');
 const infoRouter=require('./info');
 const express = require('express');
@@ -5,12 +6,15 @@ const utils=require('utility');
 const app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
-server.listen(9093);
+
 io.on('connection', function (socket) {
-    console.log(1);
-    socket.emit('news', { hello: 'world' });
-    socket.on('my other event', function (data) {
-        console.log(data);
+    socket.on('sendmsg', function (data) {
+ const {from ,to ,msg}=data;
+ const chatid=[from,to].sort().join('_');
+ Chat.create({chatid,from,to,content:msg},function (err,instance) {
+     io.emit('boradcast',Object.assign({},instance))
+ })
+        io.emit('boradcast', data);
     });
 });
 var mongoose = require("mongoose");
@@ -24,3 +28,4 @@ app.use('/info',infoRouter);
 app.get('/',function (req,res) {
     res.send( utils.md5('aaaa'));
 })
+server.listen(9093);

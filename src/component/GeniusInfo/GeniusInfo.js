@@ -53,7 +53,7 @@ export default class GeniusInfo extends Component {
                     <div style={{position: 'relative', overflow: 'auto', maxHeight: '50%'}}>
                         <TextareaItem
                             value={resume}
-                            title={'职位描述：'}
+                            title={'个人简介：'}
                             count={140}
                             rows={7} onChange={(value) => this.handleValueChange('resume', value)}/>
                     </div>

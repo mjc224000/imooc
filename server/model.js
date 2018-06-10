@@ -7,10 +7,20 @@ var userSchema=new Schema({
     type:{type:String,required:true},
     company:{type:String,required:false},
     avatar:{type:String},
-    salary:{type:Number},
+    salary:{type:String},
     position:{type:String},
     positionDesc:{type:String},
     resume:{type:String}
-},{chat:Array})
-AppUser=mongoose.model('AppUser',userSchema);
-module.exports=AppUser;
+});
+var chatSchema=new Schema({
+    chatid:{type:String,required:true},
+    from:{type:String,required:true},
+    to:{type:String,required:true},
+    read: {type:Boolean,default:false},
+    content:{type:String,required:true,default:''},
+    create_time:{type:Number,default:new Date().getTime()},
+})
+const AppUser=mongoose.model('AppUser',userSchema);
+const Chat=mongoose.model('Chat',chatSchema);
+module.exports.AppUser=AppUser;
+module.exports.Chat=Chat;

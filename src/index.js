@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import AuthReducer from './reducer/AuthReducer';
-import {createStore, applyMiddleware} from 'redux';
+import chatReducer from './reducer/ChatRedux';
+import {createStore, applyMiddleware,combineReducers} from 'redux';
 import thunk from 'redux-thunk';
 import {connect, Provider} from 'react-redux';
 import {BrowserRouter as Router, Redirect, Route,Link,Switch} from 'react-router-dom';
@@ -12,16 +13,18 @@ import DashBoard from "./container/DashBoard/DashBoardContainer";
 import MyToast from './component/MyToast/MyToast';
 import registerServiceWorker from './registerServiceWorker';
 import 'antd-mobile/dist/antd-mobile.css'
-
 const createStoreWidthMiddleware = applyMiddleware(thunk)(createStore);
-const store = createStoreWidthMiddleware(AuthReducer);
 
+ const appReducer= combineReducers({AuthReducer, chatReducer});
+ var obj={AuthReducer,chatReducer}
+
+const store = createStoreWidthMiddleware(appReducer);
 function Index() {
 
     return (<Provider store={store}>
             <Router>
                 <div>
-                    <MyToast/>
+
                     <Switch>
                         <Route path={'/login'} component={Login}/>
                         <Route path={'/registration'} component={Registration}/>
