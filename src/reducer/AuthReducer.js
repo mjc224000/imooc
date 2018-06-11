@@ -33,7 +33,6 @@ export default function AuthReducer(state = Auth, action) {
         case LOGIN_ERROR:
             return {...state, auth: false, loginErrMsg: action.errMsg}
         case LOGOUT:
-            console.log(12345);
             return {...Auth, auth: false};
         case REGISTER_ERROR:
             return {...state, auth: false, registerErrMsg: action.errMsg};

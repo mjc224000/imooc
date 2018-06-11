@@ -44,7 +44,8 @@ const data = [
         component: Chat,
         hide: "",
         className: "iconfont icon-message",
-        title:'消息中心'
+        title:'消息中心',
+          deTabBar:true
 
     },
     {
