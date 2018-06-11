@@ -17,7 +17,7 @@ var chatSchema=new Schema({
     from:{type:String,required:true},
     to:{type:String,required:true},
     read: {type:Boolean,default:false},
-    content:{type:Array,required:true,default:[]},
+    content:{type:String,required:true,default:''},
     create_time:{type:Number,default:new Date().getTime()},
 })
 const AppUser=mongoose.model('AppUser',userSchema);
