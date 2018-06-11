@@ -32,7 +32,7 @@ this.props.recvMsg()
                 <div className='chat-list'>
                     <List>
                         {this.props.chat.chatmsg.map((v)=>{
-                            <Item thumb={}>
+                            <Item>
 
                             </Item>
                         })}

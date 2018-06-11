@@ -35,7 +35,7 @@ class TabBar extends Component {
 
                 {navList.map((v, i) => {
                     let selected = selectedIndex === i ? ' selected' : '';
-                    return (
+                    return v.deTabBar?null:(
                         <li key={v.path}  className={selected} onTouchStart={() => this.handlePress(v.path)} onClick={() => this.handlePress(v.path, i)}>
                             <i className={v.className}></i>
                             <span>{v.title}</span>

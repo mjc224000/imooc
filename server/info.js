@@ -1,7 +1,6 @@
 
 
 var express = require('express');
-var getToken = require('./utils').getToken;
 var utils = require('utility');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
