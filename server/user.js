@@ -27,7 +27,7 @@ router.post('/login', function (req, res) {
             var userPassword = instance.password;
             if (userPassword === md5Password) ;
             {
-                res.cookie('Token',instance._id, {expires: new Date(Date.now() + 900000), httpOnly: true})
+                res.cookie('Token', instance._id, {expires: new Date(Date.now() + 900000), httpOnly: true})
 
                 setTimeout(function () {
                     res.json({code: 0, msg: "register success", data: instance});
@@ -56,8 +56,7 @@ router.post('/register', function (req, res) {
             if (err) {
                 res.json({code: 1, msg: 'server error'})
             } else {
-
-                res.cookie('Token',instance._id, {expires: new Date(Date.now() + 900000), httpOnly: true})
+                res.cookie('Token', instance._id, {expires: new Date(Date.now() + 900000), httpOnly: true})
                 setTimeout(function () {
                     res.json({code: 0, msg: "register success", data: instance});
                 }, 3000)

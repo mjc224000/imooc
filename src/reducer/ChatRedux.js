@@ -1,15 +1,15 @@
 import {_axios} from "./util";
 import io from 'socket.io-client';
-import chat from "../container/ChatContainer/chat";
+
 const socket = io('ws://localhost:9093/');
 const MSG_LIST = 'MSG_LIST';
 const MSG_RECV = 'MSG_RECV';
 const MSG_READ = 'MSG_READ';
 const CLOSE_MSG = 'CLOSE_MSG';
+const SEND_MSG = 'SEND_MSG';
 const initState = {
     chatmsg: [],
     unread: 0,
-    toUser: {}
 }
 export default function chatReducer(state = initState, action) {
     switch (action.type) {
@@ -18,11 +18,15 @@ export default function chatReducer(state = initState, action) {
                 ...state, chatmsg: action.payload,
                 unread: action.payload.filter(v => !v.read).length
             }
-        case MSG_RECV:
-            return {...state, chatmsg: [...state.chatmsg, action.payload]}
+        case MSG_RECV: {
+            var target = state.chatmsg.findIndex(v => v.chatid === action.payload.chatid);
+            state.chatmsg[target] = action.payload;
+            return {...state, chatmsg: [...state.chatmsg]}
+        }
         case MSG_READ:
         case CLOSE_MSG:
-            return {...state, chatmsg: []}
+        case SEND_MSG: {
+        }
         default:
             return state
     }
@@ -36,20 +40,19 @@ function msgRecv(msg) {
     return {type: MSG_RECV, payload: msg};
 }
 
-export function getMsg(msg) {
+export function getMsg(chatid) {
     return dispatch => {
-        socket.on('boradcast', function (data) {
-            console.dir(data, 'bodada');
+        socket.on(chatid, function (data) {
+
         })
     }
 }
 
-export function getMsgList(msgId) {
+export function getMsgList(_id) {
     return dispatch => {
-        if(!msgId) return
-        _axios.get('/user/getMsgList', {params: {msgId}}).then(res => {
+        _axios.get('/msg/getMsgList', {params: {_id}}).then(res => {
             if (res.state == 200 && res.data.code == 0) {
-                dispatch(msgList(res.data.msgs))
+                dispatch(msgList(res.data.data))
             }
         })
     }

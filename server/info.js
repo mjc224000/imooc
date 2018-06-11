@@ -1,11 +1,8 @@
-
-
 var express = require('express');
-var utils = require('utility');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var AppUser = require('./model').AppUser;
-var _User = require('./utils')._User;
+var Chat=require('./model').Chat;
 var router = express.Router();
 // 该路由使用的中间件
 router.use(cookieParser());
@@ -27,15 +24,7 @@ router.get('/List', function (req, res) {
         }
     })
 })
-router.get('/getmsglist',function (req,res) {
-    const user=req.cookies.Token;
- //   Chat.find({'$or':[{from:user,to:user}]})
-    Chat.find({},function (err,doc) {
-        if(!err){
-            res.json({code:0,msgs:doc})
-        }
-    })
-})
+
 router.get('/userUpdate', function (req, res) {
     const {position, positionDesc, company, salary, avatar, resume, _id} = req.query;
     console.log(_id);
