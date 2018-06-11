@@ -1,6 +1,5 @@
 const utils = require('utility');
 const express = require('express');
-const getToken = require('./utils').getToken;
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const AppUser = require('./model').AppUser;
@@ -28,11 +27,9 @@ router.post('/login', function (req, res) {
             if (userPassword === md5Password) ;
             {
                 res.cookie('Token', instance._id, {expires: new Date(Date.now() + 900000), httpOnly: true})
-
                 setTimeout(function () {
                     res.json({code: 0, msg: "register success", data: instance});
                 }, 0)
-
             }
         }
     })

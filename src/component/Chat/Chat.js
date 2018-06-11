@@ -11,7 +11,9 @@ class Chat extends Component {
         this.handleSubmit=this.handleSubmit.bind(this);
     }
 handleSubmit(){
-//socket.emit('sendmsg',{text:this.state.text})
+//socket.emit('sendmsg',{text:this.state.text});
+    this.props.history
+    this.props.sendMsg()
 this.setState({text:''})
 
 }
@@ -31,11 +33,11 @@ this.props.recvMsg()
             <div className='chat'>
                 <div className='chat-list'>
                     <List>
-                        {this.props.chat.chatmsg.map((v)=>{
+                       {/* {this.props.chat.chatmsg.map((v)=>{
                             <Item>
 
                             </Item>
-                        })}
+                        })}*/}
                     </List>
 
                 </div>

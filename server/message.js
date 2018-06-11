@@ -6,16 +6,9 @@ module.exports.message = function (server) {
         socket.on('sendmsg', function (data) {
             const {from, to, msg} = data;
             const chatid = [from, to].sort().join('_');
-            Chat.findOne({chatid}, function (err, instance) {
-                if (instance) {
-                    instance.content.push(msg)
-                    instance.save();
-                } else {
-                    const ChatInstance=new Chat({chatid, from, to, content: [msg]});
-                    ChatInstance.save();
-                }
-                io.emit(chatid,instance)
-            })
+            const ChatInstance=new Chat({chatid, from, to, content: msg});
+                ChatInstance.save();
+                io.emit(chatid,msg)
         });
     });
 }
