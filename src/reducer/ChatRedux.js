@@ -19,7 +19,6 @@ export default function chatReducer(state = initState, action) {
                 unread: action.payload.filter(v => !v.read).length
             }
         case MSG_RECV: {
-
             return {...state, chatmsg: [...state.chatmsg,action.payload]}
         }
         case MSG_READ:
