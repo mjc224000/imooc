@@ -12,16 +12,15 @@ class BossContainer extends Component{
             position: null,
             positionDesc: null,
             salary: 0,
-            avatar:''
+            avatar:'',
+            _id:null
         }
         this.handleValueChange=this.handleValueChange.bind(this)
         this.handleUpdate=this.handleUpdate.bind(this);
     }
     componentDidMount(){
-   const{company,position,positionDesc,salary,avatar}=this.props;
-        this.setState({company,position,positionDesc,salary,avatar});
-
-
+   const{company,position,positionDesc,salary,avatar,_id}=this.props;
+        this.setState({company,position,positionDesc,salary,avatar,_id});
     }
     handleValueChange({key, value}) {
         console.log(key, value);

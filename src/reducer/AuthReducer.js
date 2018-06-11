@@ -19,7 +19,9 @@ const Auth = {
     username: null,
     _id: null,
     redirectTo:null,
-    avatar:null
+    avatar:null,
+    resume:null,
+    positionDesc:null
 }
 //reducer
 export default function AuthReducer(state = Auth, action) {
@@ -116,7 +118,6 @@ export function register(option) {
 }
 //不需要写里面的啊 大哥
 export const update = (option) => (dispatch) => {
-    dispatch(beginAxios());
     _axios.get('/info/userUpdate',{params:{...option}}).then(res=>{
        dispatch({type:UPDATE,payload:res.data.data})
     })

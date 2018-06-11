@@ -21,14 +21,11 @@ export default class InfoCenter extends Component {
         this.props.onLogout();
     }
 
-    componentDidMount() {
-    }
-
     render() {
         const Item = List.Item,
             Brief = Item.Brief;
         const {type, positionDesc, salary, avatar, username, company, resume} = this.props;
-        var desc = positionDesc || resume;
+        var desc=type==='genius'?resume:positionDesc;
         desc = desc && desc.split('\n') || [];
         const myImg = src => <img src={src} className="spe am-icon am-icon-md" alt=""/>;
         return (<div className="info-center">

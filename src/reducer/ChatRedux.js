@@ -19,12 +19,11 @@ export default function chatReducer(state = initState, action) {
                 unread: action.payload.filter(v => !v.read).length
             }
         case MSG_RECV: {
-            return {...state, chatmsg: [...state.chatmsg,action.payload]}
+            return {...state, chatmsg: [...state.chatmsg, action.payload]}
         }
         case MSG_READ:
         case CLOSE_MSG:
-        case SEND_MSG: {
-        }
+        case SEND_MSG:
         default:
             return state
     }
@@ -38,12 +37,19 @@ function msgRecv(msg) {
     return {type: MSG_RECV, payload: msg};
 }
 
-export function getMsg(chatid) {
+export function getMsg({from, to}) {
+    const chatid = [from, to].sort().join('_');
     return dispatch => {
         socket.on(chatid, function (data) {
-         dispatch(msgRecv(data))
+            dispatch(msgRecv(data))
         })
     }
+}
+
+export function sendMsg({from, to, msg}) {
+    socket.emit('sendmsg', {from, to, msg})
+return function () {
+}
 }
 
 export function getMsgList(_id) {
