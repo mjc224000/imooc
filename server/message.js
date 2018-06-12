@@ -20,7 +20,7 @@ module.exports.message = function (server) {
             const chatid = [from, to].sort().join('_');
             const ChatInstance=new Chat({chatid, from, to, content: msg});
             ChatInstance.save();
-            io.emit(chatid,msg)
+            io.emit(chatid,ChatInstance)
         });
     });
 }

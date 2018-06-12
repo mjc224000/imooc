@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Card, List, WingBlank} from 'antd-mobile';
 import './BossList.css'
+
 export default class GeniusList extends Component {
     constructor(props) {
         super(props);
@@ -8,33 +9,39 @@ export default class GeniusList extends Component {
     }
 
     handleClick(val) {
-        this.props.history.push('/chat/' + val);
+      var path={
+          pathname:'/chat',
+          query:val
+      }
+        this.props.history.push(path);
     }
 
     render() {
-        const bossList = this.props.bossList;
-        const isGeniusList=this.props.type==='boss';
+        const userList = this.props.userList;
+        const isGeniusList = this.props.type === 'boss';
         const Item = List.Item;
         const Brief = Item.Brief;
-
         return (
             <div>
                 {
-                    bossList.map(v => {
+                    userList.map(v => {
                         return v.avatar ? (<List key={v.username}>
                             <WingBlank>
-                                <Card onClick={()=>this.handleClick(v._id)}>
+                                <Card onClick={() => this.handleClick({
+                                    id: v._id,
+                                    avatar: v.avatar
+                                })}>
                                     <Card.Header
-                                        title={ <div style={{display:'flex',flexFlow:'column'}}>
-                                            <Brief>{ v.username}</Brief>
-                                            <span>{ v.position}</span>
-                                        </div> }
+                                        title={<div style={{display: 'flex', flexFlow: 'column'}}>
+                                            <Brief>{v.username}</Brief>
+                                            <span>{v.position}</span>
+                                        </div>}
                                         thumb={v.avatar}
                                         extra={<span>{v.salary}</span>}
                                     />
                                     <Card.Body>
-                                        <div>{isGeniusList?'最近所在公司':''+v.company}</div>
-                                        {isGeniusList?v.resume:v.positionDesc}
+                                        <div>{isGeniusList ? '最近所在公司' : '' + v.company}</div>
+                                        {isGeniusList ? v.resume : v.positionDesc}
                                     </Card.Body>
                                 </Card>
                             </WingBlank>

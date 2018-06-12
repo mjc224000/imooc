@@ -15,7 +15,6 @@ router.use(function (req, res, next) {
 })
 router.get('/List', function (req, res) {
     const { type } = req.query;
-    console.log(type);
     AppUser.find({ type }, function (err, instances) {
         if (err) {
             return res.json({code: 1, errMsg: 'server error'})

@@ -20,9 +20,8 @@ const data = [
     {
         path: '/UserList',
         component: UserListContainer,
-        hide: 'boss',
         className: 'iconfont icon-shizi',
-        title:'Boss列表'
+        title:'信息列表'
     },
     {
         path: '/geniusList',
@@ -40,7 +39,7 @@ const data = [
     },
     {
         title: 'Chat',
-        path: '/chat/:id',
+        path: '/Chat',
         component: Chat,
         hide: "",
         className: "iconfont icon-message",
