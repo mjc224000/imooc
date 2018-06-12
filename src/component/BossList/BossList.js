@@ -13,10 +13,12 @@ export default class GeniusList extends Component {
 
     render() {
         const bossList = this.props.bossList;
+
         return (
             <div>
                 {
                     bossList.map(v => {
+
                         return v.avatar ? (<List key={v.username}>
                             <WingBlank>
                                 <Card onClick={()=>this.handleClick(v._id)}>
@@ -27,7 +29,7 @@ export default class GeniusList extends Component {
                                     />
                                     <Card.Body>
                                         <div>{v.company}</div>
-                                        {v.desc}
+                                        {v.positionDesc}
                                     </Card.Body>
                                 </Card>
                             </WingBlank>

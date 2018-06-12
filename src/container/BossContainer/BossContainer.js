@@ -2,6 +2,8 @@ import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import Boss from './../../component/Boss/BossInfo';
+import UserList from './../../component/Boss/userList';
+
 import {update} from "../../reducer/AuthReducer";
 
 class BossContainer extends Component{
@@ -31,7 +33,7 @@ class BossContainer extends Component{
     }
     render(){
        if(this.props.isAuth){
-            return <Boss {...this.props} {...this.state} onUpdate={this.handleUpdate} onValueChange={this.handleValueChange}  />
+            return <UserList {...this.props} {...this.state} onUpdate={this.handleUpdate} onValueChange={this.handleValueChange}  />
         }
         return(<Redirect to={'/login'}/>)
     }
