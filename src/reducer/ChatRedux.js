@@ -11,6 +11,11 @@ const initState = {
     chatmsg: [],
     unread: 0,
 }
+var i=0;
+function index() {
+    return i+1;
+}
+
 export default function chatReducer(state = initState, action) {
     switch (action.type) {
         case MSG_LIST:
@@ -18,6 +23,7 @@ export default function chatReducer(state = initState, action) {
                 ...state, chatmsg: action.payload,
                 unread: action.payload.filter(v => !v.read).length
             }
+            //current chat user
         case MSG_RECV: {
             return {...state, chatmsg: [...state.chatmsg, action.payload]}
         }
@@ -48,8 +54,7 @@ export function getMsg({from, to}) {
 
 export function sendMsg({from, to, msg}) {
     socket.emit('sendmsg', {from, to, msg})
-return function () {
-}
+return {type:SEND_MSG};
 }
 
 export function getMsgList(_id) {
@@ -60,4 +65,8 @@ export function getMsgList(_id) {
             }
         })
     }
+}
+export  function socketClose() {
+    socket.close()
+    return {type:''}
 }

@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import Boss from './../../component/Boss/BossInfo';
+
 import {update} from "../../reducer/AuthReducer";
 
 class BossContainer extends Component{

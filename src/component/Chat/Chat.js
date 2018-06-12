@@ -1,9 +1,15 @@
 import React, {Component} from 'react';
-import {InputItem, Button, List} from 'antd-mobile';
+import {InputItem, List} from 'antd-mobile';
 import './chat.css';
+import {logout} from "../../reducer/AuthReducer";
 
+var isFirstSocket = [];
 
 class Chat extends Component {
+    static defaultProps = {
+        chatmsg: []
+    }
+
     constructor(props) {
         super(props);
         this.state = {text: ''}
@@ -12,11 +18,11 @@ class Chat extends Component {
     }
 
     handleSubmit() {
-//socket.emit('sendmsg',{text:this.state.text});
+
         const {_id} = this.props
         this.props.sendMsg({
             from: _id,
-            to: this.props.match.params.id,
+            to: this.props.location.query.id,
             msg: this.state.text
         })
         this.setState({text: ''})
@@ -29,9 +35,15 @@ class Chat extends Component {
 
     componentDidMount() {
 //this.props.getMsgList();
-        const {from,to}={from:this.props._id,to:this.props.match.params.id}
-this.props.getMsg({from,to});
-        console.log(this.props);
+
+
+        const {from, to} = {from: this.props._id, to:  this.props.location.query.id}
+        var key = from + to;
+        if (!isFirstSocket[key]) {
+            isFirstSocket[key] = true;
+          this.props.getMsg({from, to});
+        }
+
     }
 
     render() {
@@ -41,13 +53,13 @@ this.props.getMsg({from,to});
             <div className='chat'>
                 <div className='chat-list'>
                     <List>
-                        {/* {this.props.chat.chatmsg.map((v)=>{
-                            <Item>
+                        {this.props.chatmsg.map(v => {
+                            return v.from === this.props._id ?
+                                <Item extra={<img src={this.props.avatar} alt=""/>}>{v.content}</Item> :
+                                <Item thumb={<img src={this.props.location.query.avatar}/>   }>{v.content}</Item>
 
-                            </Item>
-                        })}*/}
+                        })}
                     </List>
-
                 </div>
                 <div className='chat-footer'>
                     <InputItem className='chat-footer-input'

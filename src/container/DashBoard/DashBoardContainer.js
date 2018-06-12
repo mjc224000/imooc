@@ -5,7 +5,7 @@ import DashBoard from './../../component/DashBoard/Dashboard';
 import GeniusList from './../GeniusList/GeniusList';
 import BossContainer from './../BossContainer/BossContainer';
 import GeniusContainer from './../GeniusInfo/GeniusInfo';
-import BossListContainer from './../BossList/BossList';
+import UserListContainer from './../UserList/UserList';
 import ChatRoom from './../ChatRoom/ChatRoom';
 import InfoCenter from './../InfoCenter/InfoCenter';
 import Chat from './../ChatContainer/chat';
@@ -18,11 +18,10 @@ function BossList() {
 
 const data = [
     {
-        path: '/bossList',
-        component: BossListContainer,
-        hide: 'boss',
+        path: '/UserList',
+        component: UserListContainer,
         className: 'iconfont icon-shizi',
-        title:'Boss列表'
+        title:'信息列表'
     },
     {
         path: '/geniusList',
@@ -40,7 +39,7 @@ const data = [
     },
     {
         title: 'Chat',
-        path: '/chat/:id',
+        path: '/Chat',
         component: Chat,
         hide: "",
         className: "iconfont icon-message",
