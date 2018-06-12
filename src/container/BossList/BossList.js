@@ -1,4 +1,5 @@
 import BossList from './../../component/BossList/BossList';
+import UserList from './../../component/BossList/UserList';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import React, {Component} from 'react';
@@ -23,7 +24,7 @@ class BossListContainer extends Component {
     }
 
     render() {
-        return <BossList {...this.props} bossList={this.state.bossList}/>
+        return <UserList {...this.props} bossList={this.state.bossList}/>
     }
 }
 
