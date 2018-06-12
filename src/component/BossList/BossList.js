@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import {Card, List, WingBlank} from 'antd-mobile';
 import './BossList.css'
 export default class GeniusList extends Component {
+    static defaultProps ={
+        bossList:[]
+    }
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
@@ -21,7 +24,9 @@ export default class GeniusList extends Component {
                             <WingBlank>
                                 <Card onClick={()=>this.handleClick(v._id)}>
                                     <Card.Header
-                                        title={v.position}
+                                        title={<div style={{display:'flex',flexFlow:'column'} }>
+                                            <span style={{color:'silver'}}>{v.username}</span>
+                                            <span>{v.position}</span> </div> }
                                         thumb={v.avatar}
                                         extra={<span>{v.salary}</span>}
                                     />
