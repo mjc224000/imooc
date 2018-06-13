@@ -15,6 +15,7 @@ router.use(function (req, res, next) {
 })
 router.get('/List', function (req, res) {
     const { type } = req.query;
+
     AppUser.find({ type }, function (err, instances) {
         if (err) {
             return res.json({code: 1, errMsg: 'server error'})
@@ -26,7 +27,6 @@ router.get('/List', function (req, res) {
 
 router.get('/userUpdate', function (req, res) {
     const {position, positionDesc, company, salary, avatar, resume, _id} = req.query;
-    console.log(_id);
     AppUser.update({_id},
         {position, positionDesc, company, salary, avatar, resume},
         function (err) {

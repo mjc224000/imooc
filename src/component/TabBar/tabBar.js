@@ -22,6 +22,11 @@ class TabBar extends Component {
         this.state = {selectedIndex: null}
     }
 
+    componentDidMount() {
+        this.props.getMsgList()
+        this.props.getMsg(this.props._id)
+    }
+
     handlePress(path, index) {
         this.props.onPress(path);
         this.setState({selectedIndex: index});
@@ -35,8 +40,9 @@ class TabBar extends Component {
 
                 {navList.map((v, i) => {
                     let selected = selectedIndex === i ? ' selected' : '';
-                    return v.deTabBar?null:(
-                        <li key={v.path}  className={selected} onTouchStart={() => this.handlePress(v.path)} onClick={() => this.handlePress(v.path, i)}>
+                    return v.deTabBar ? null : (
+                        <li key={v.path} className={selected} onTouchStart={() => this.handlePress(v.path)}
+                            onClick={() => this.handlePress(v.path, i)}>
                             <i className={v.className}></i>
                             <span>{v.title}</span>
                         </li>)

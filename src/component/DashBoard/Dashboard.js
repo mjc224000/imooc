@@ -3,7 +3,6 @@ import {TabBar, NavBar, Icon} from 'antd-mobile';
 import MyTabBar from './../TabBar/tabBar';
 import {Route, Link, withRouter} from 'react-router-dom';
 import  PropTypes from 'prop-types';
-
 export default class TabBarExample extends React.Component {
     static propTypes={
      navList:PropTypes.array.isRequired
@@ -32,9 +31,7 @@ export default class TabBarExample extends React.Component {
                 top: 0,
                 display:'flex',
              flexFlow:'column',
-
-
-            } : {height: 400}}>
+              } : {height: 400}}>
 
                 <NavBar className={'header'} leftContent={<Icon type={'left'} onClick={() => this.props.history.go(-1)}/>}>
                     {11}
@@ -45,8 +42,7 @@ export default class TabBarExample extends React.Component {
                             return <Route key={v.path} path={v.path} component={v.component}></Route>
                     })}
                 </div>
-
-                <MyTabBar navList={this.props.navList} onPress={this.handleTabPress}/>
+                <MyTabBar navList={this.props.navList}  _id={this.props._id} getMsg={this.props.getMsg} getMsgList={this.props.getMsgList}  onPress={this.handleTabPress}/>
 
             </div>
         );

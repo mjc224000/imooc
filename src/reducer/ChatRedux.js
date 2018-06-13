@@ -1,6 +1,5 @@
 import {_axios} from "./util";
 import io from 'socket.io-client';
-
 const socket = io('ws://localhost:9093/');
 const MSG_LIST = 'MSG_LIST';
 const MSG_RECV = 'MSG_RECV';
@@ -43,10 +42,10 @@ function msgRecv(msg) {
     return {type: MSG_RECV, payload: msg};
 }
 
-export function getMsg({from, to}) {
-    const chatid = [from, to].sort().join('_');
+export function getMsg( addr) {
     return dispatch => {
-        socket.on(chatid, function (data) {
+        console.log(addr,'addr');
+        socket.on(addr, function (data) {
             dispatch(msgRecv(data))
         })
     }

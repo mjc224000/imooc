@@ -6,36 +6,35 @@ import GeniusList from './../GeniusList/GeniusList';
 import BossContainer from './../BossContainer/BossContainer';
 import GeniusContainer from './../GeniusInfo/GeniusInfo';
 import UserListContainer from './../UserList/UserList';
-import ChatRoom from './../ChatRoom/ChatRoom';
 import InfoCenter from './../InfoCenter/InfoCenter';
 import Chat from './../ChatContainer/chat';
-import axios from 'axios';
+import {getMsg} from './../../reducer/ChatRedux';
+import {getMsgList} from "../../reducer/ChatRedux";
 
 function BossList() {
     return <h2> BossList</h2>
 }
-
 
 const data = [
     {
         path: '/UserList',
         component: UserListContainer,
         className: 'iconfont icon-shizi',
-        title:'信息列表'
+        title: '信息列表'
     },
     {
         path: '/geniusList',
         component: GeniusList,
         hide: 'genius',
         className: 'iconfont icon-superhero-',
-        title:'牛人列表'
+        title: '牛人列表'
     },
     {
         path: '/geniusInfo',
         component: GeniusContainer,
         hide: 'boss',
-        className:'iconfont icon-yonghuzhongxin',
-        title:'用户中心'
+        className: 'iconfont icon-yonghuzhongxin',
+        title: '用户中心'
     },
     {
         title: 'Chat',
@@ -43,8 +42,8 @@ const data = [
         component: Chat,
         hide: "",
         className: "iconfont icon-message",
-        title:'消息中心',
-          deTabBar:true
+        title: '消息中心',
+        deTabBar: true
 
     },
     {
@@ -52,16 +51,17 @@ const data = [
         component: BossContainer,
         path: '/bossInfo',
         className: 'iconfont icon-yonghuzhongxin',
-        title:'用户中心'
+        title: '用户中心'
     },
     {
         hide: '',
         component: InfoCenter,
         path: '/InfoCenter',
         className: 'iconfont icon-yonghuzhongxin',
-        title:'用户中心'
+        title: '用户中心'
     }
 ]
+let isFirstOn = false;
 
 class DashBoardContainer extends Component {
     constructor(props) {
@@ -72,9 +72,9 @@ class DashBoardContainer extends Component {
     handlePress(url) {
         this.props.history.push(url);
     }
+
     render() {
         let navList = data.filter((v) => v.hide !== this.props.type);
-
         if (!this.props.isAuth) {
             console.log(this.props);
             return (<Redirect to={'/login'}></Redirect>)
@@ -84,7 +84,13 @@ class DashBoardContainer extends Component {
 
 }
 
-const mapStateToProps = ( {AuthReducer:state}) => {
-    return {isAuth: state.auth, type: state.type,loading:state.loading}
+const mapStateToProps = ({AuthReducer: state}) => {
+    return {isAuth: state.auth, type: state.type, loading: state.loading, _id: state._id}
 }
-export default withRouter(connect(mapStateToProps)(DashBoardContainer));
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getMsg: (id) => dispatch(getMsg(id)),
+        getMsgList:(id)=>dispatch(getMsgList(id))
+    }
+}
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DashBoardContainer));
