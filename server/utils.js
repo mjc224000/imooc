@@ -1,9 +1,10 @@
 const getToken=(function () {
-    var Token=null;
-    return function getToken() {
-        if(!Token)
-            Token=Math.random().toString();
-        return Token
+    var _Token=null;
+    return function getToken(Token) {
+        if(!_Token && Token)
+            _Token=Token
+
+        return _Token
     }
 })()
 

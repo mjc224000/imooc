@@ -2,9 +2,6 @@ import React, {Component} from 'react';
 import {InputItem, List} from 'antd-mobile';
 import './chat.css';
 import {logout} from "../../reducer/AuthReducer";
-
-var isFirstSocket = [];
-
 class Chat extends Component {
     static defaultProps = {
         chatmsg: []
@@ -15,6 +12,7 @@ class Chat extends Component {
         this.state = {text: ''}
         this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.chatList=React.createRef();
     }
 
     handleSubmit() {
@@ -26,38 +24,33 @@ class Chat extends Component {
             msg: this.state.text
         })
         this.setState({text: ''})
-
+        this.scrollToBottom();
     }
-
     handleChange(v) {
         this.setState({text: v})
     }
-
-    componentDidMount() {
-//this.props.getMsgList();
-
-
-        const {from, to} = {from: this.props._id, to:  this.props.location.query.id}
-        var key = from + to;
-        if (!isFirstSocket[key]) {
-            isFirstSocket[key] = true;
-          this.props.getMsg({from, to});
-        }
-
+    componentDidMount(){
+         this.scrollToBottom();
     }
-
+    /* 设置滚动条到底部，在didMount和Click之后调用*/
+    scrollToBottom(){
+        setTimeout(()=>{
+            var target=this.chatList.current;
+            var scrollTop=target.scrollHeight-target.clientHeight;
+            target.scrollTo(0,scrollTop) }  ,0);
+    }
     render() {
         const Item = List.Item
-        console.log(this.props.chatmsg);
+    const curId=this.props.location.query.id
+      const curChatMsg=this.props.chatmsg.filter(v=>v.from===curId || v.to===curId);
         return (
-            <div className='chat'>
-                <div className='chat-list'>
+            <div ref={this.chatList} className='chat'>
+                <div    className='chat-list'>
                     <List>
-                        {this.props.chatmsg.map(v => {
+                        {curChatMsg.map((v,i) => {
                             return v.from === this.props._id ?
-                                <Item extra={<img src={this.props.avatar} alt=""/>}>{v.content}</Item> :
-                                <Item thumb={<img src={this.props.location.query.avatar}/>   }>{v.content}</Item>
-
+                                <Item key={i} extra={<img src={this.props.avatar} alt=""/>}>{v.content}</Item> :
+                                <Item key={i} thumb={<img src={this.props.location.query.avatar}/>   }>{v.content}</Item>
                         })}
                     </List>
                 </div>
@@ -68,9 +61,7 @@ class Chat extends Component {
                                value={this.state.text}
                                extra={<span type={'primary'} onClick={this.handleSubmit}>提交</span>}
                     />
-
                 </div>
-
             </div>
         )
     }
