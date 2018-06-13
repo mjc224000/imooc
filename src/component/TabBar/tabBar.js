@@ -23,7 +23,7 @@ class TabBar extends Component {
     }
 
     componentDidMount() {
-        this.props.getMsgList()
+        this.props.getMsgList(this.props._id);
         this.props.getMsg(this.props._id)
     }
 

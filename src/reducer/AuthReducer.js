@@ -21,7 +21,8 @@ const Auth = {
     redirectTo:null,
     avatar:null,
     resume:null,
-    positionDesc:null
+    positionDesc:null,
+    userList:[]
 }
 //reducer
 export default function AuthReducer(state = Auth, action) {

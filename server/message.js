@@ -32,6 +32,7 @@ module.exports.router = router.get('/getMsgList', function (req, res) {
     Chat.find({'$or': [{from: _id}, {to: _id}]}, function (err, instances) {
         if (!err) {
             res.json({code: 0, data: instances})
+
         }
     })
 })

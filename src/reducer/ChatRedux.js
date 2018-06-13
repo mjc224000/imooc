@@ -6,6 +6,7 @@ const MSG_RECV = 'MSG_RECV';
 const MSG_READ = 'MSG_READ';
 const CLOSE_MSG = 'CLOSE_MSG';
 const SEND_MSG = 'SEND_MSG';
+const GET_USER_LIST='GET_USER_LIST';
 const initState = {
     chatmsg: [],
     unread: 0,
@@ -57,12 +58,19 @@ return {type:SEND_MSG};
 }
 
 export function getMsgList(_id) {
+    console.log(1);
     return dispatch => {
         _axios.get('/msg/getMsgList', {params: {_id}}).then(res => {
-            if (res.state == 200 && res.data.code == 0) {
+            if (res.status == 200 && res.data.code == 0) {
+                console.log(res.data.data);
                 dispatch(msgList(res.data.data))
             }
         })
+    }
+}
+export function getUsrList() {
+    return (dispatch)=>{
+
     }
 }
 export  function socketClose() {
