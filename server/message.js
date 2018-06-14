@@ -18,6 +18,10 @@ module.exports.message = function (server) {
 
         socket.on('sendmsg', function (data) {
             const {from,to, msg} = data;
+            if(msg.trim().length===0)
+            {
+                return
+            }
             const chatid = [from, to].sort().join('_');
             const ChatInstance = new Chat({chatid, from, to, content: msg});
             ChatInstance.save();

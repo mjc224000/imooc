@@ -11,6 +11,7 @@
     flex:0 0 10vh;
 }
 .main{
+    position: relative;
     flex: 1;
     max-height: 80vh;
     overflow: auto;
