@@ -1,19 +1,22 @@
 import {_axios} from "./util";
 import io from 'socket.io-client';
+
 const socket = io('ws://localhost:9093/');
 const MSG_LIST = 'MSG_LIST';
 const MSG_RECV = 'MSG_RECV';
 const MSG_READ = 'MSG_READ';
 const CLOSE_MSG = 'CLOSE_MSG';
 const SEND_MSG = 'SEND_MSG';
-const GET_USER_LIST='GET_USER_LIST';
+const GET_USER_LIST = 'GET_USER_LIST';
 const initState = {
     chatmsg: [],
     unread: 0,
+    userList: []
 }
-var i=0;
+var i = 0;
+
 function index() {
-    return i+1;
+    return i + 1;
 }
 
 export default function chatReducer(state = initState, action) {
@@ -23,9 +26,12 @@ export default function chatReducer(state = initState, action) {
                 ...state, chatmsg: action.payload,
                 unread: action.payload.filter(v => !v.read).length
             }
-            //current chat user
+        //current chat user
         case MSG_RECV: {
             return {...state, chatmsg: [...state.chatmsg, action.payload]}
+        }
+        case GET_USER_LIST: {
+            return {...state, userList: action.payload}
         }
         case MSG_READ:
         case CLOSE_MSG:
@@ -43,9 +49,9 @@ function msgRecv(msg) {
     return {type: MSG_RECV, payload: msg};
 }
 
-export function getMsg( addr) {
+export function getMsg(addr) {
     return dispatch => {
-        console.log(addr,'addr');
+        console.log(addr, 'addr');
         socket.on(addr, function (data) {
             dispatch(msgRecv(data))
         })
@@ -54,26 +60,29 @@ export function getMsg( addr) {
 
 export function sendMsg({from, to, msg}) {
     socket.emit('sendmsg', {from, to, msg})
-return {type:SEND_MSG};
+    return {type: SEND_MSG};
 }
 
 export function getMsgList(_id) {
-    console.log(1);
     return dispatch => {
         _axios.get('/msg/getMsgList', {params: {_id}}).then(res => {
             if (res.status == 200 && res.data.code == 0) {
-                console.log(res.data.data);
                 dispatch(msgList(res.data.data))
             }
         })
     }
 }
-export function getUsrList() {
-    return (dispatch)=>{
 
+export function getUsrList(type) {
+    return (dispatch) => {
+        _axios.get('/info/List', {
+            params: {
+                type: type
+            }
+        }).then((res) => {
+            if (res.status === 200 && res.data.code === 0) {
+                dispatch({type: GET_USER_LIST, payload: res.data.data})
+            }
+        })
     }
-}
-export  function socketClose() {
-    socket.close()
-    return {type:''}
 }

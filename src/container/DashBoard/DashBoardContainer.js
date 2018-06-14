@@ -11,10 +11,6 @@ import Chat from './../ChatContainer/chat';
 import {getMsg} from './../../reducer/ChatRedux';
 import {getMsgList} from "../../reducer/ChatRedux";
 
-function BossList() {
-    return <h2> BossList</h2>
-}
-
 const data = [
     {
         path: '/UserList',
@@ -38,7 +34,7 @@ const data = [
     },
     {
         title: 'Chat',
-        path: '/Chat',
+        path: '/chat',
         component: Chat,
         hide: "",
         className: "iconfont icon-message",

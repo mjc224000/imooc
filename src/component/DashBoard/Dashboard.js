@@ -3,6 +3,7 @@ import {TabBar, NavBar, Icon} from 'antd-mobile';
 import MyTabBar from './../TabBar/tabBar';
 import {Route, Link, withRouter} from 'react-router-dom';
 import  PropTypes from 'prop-types';
+import QueueAnim from 'rc-queue-anim';
 export default class TabBarExample extends React.Component {
     static propTypes={
      navList:PropTypes.array.isRequired
@@ -23,6 +24,7 @@ export default class TabBarExample extends React.Component {
 
     render() {
         var navList = this.props.navList || [];
+
         return (
             <div style={this.state.fullScreen ? {
                 position: 'fixed',
@@ -39,7 +41,10 @@ export default class TabBarExample extends React.Component {
                 <div className={'main'}>
                     {
                     navList.map(v => {
-                            return <Route key={v.path} path={v.path} component={v.component}></Route>
+                        if(this.props.location.pathname===v.path){
+                            return  <QueueAnim> <Route key={v.path} path={v.path} component={v.component}></Route>  </QueueAnim>
+                        }
+
                     })}
                 </div>
                 <MyTabBar navList={this.props.navList}  _id={this.props._id} getMsg={this.props.getMsg} getMsgList={this.props.getMsgList}  onPress={this.handleTabPress}/>

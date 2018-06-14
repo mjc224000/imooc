@@ -5,8 +5,8 @@ import {withRouter} from 'react-router-dom';
 
 import {sendMsg} from "../../reducer/ChatRedux";
 
-const mapStateToProps = ({AuthReducer: state, chatReducer}) => {
-    return {...state, ...chatReducer}
+const mapStateToProps = ({AuthReducer: state, Chat}) => {
+    return {...state, ...Chat}
 };
 const mapDispatchToProps = (dispatch) => {
     return {
