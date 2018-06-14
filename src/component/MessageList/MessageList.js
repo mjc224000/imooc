@@ -26,7 +26,6 @@ class MessageList extends Component {
                                 </Card>
                                 <WhiteSpance/>
                             </ListItem>
-
                         )
                     })}
                 </List>

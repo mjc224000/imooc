@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import React, {Component} from 'react';
 import {_axios} from "../../reducer/util";
+import {getUsrList} from "../../reducer/ChatRedux";
+
 class UserListContainer extends Component {
     constructor(props) {
         super(props);
@@ -11,23 +13,17 @@ class UserListContainer extends Component {
     }
     componentDidMount() {
         const type=this.props.type==='boss'?'genius':'boss';
-        _axios.get('/info/List', {
-            params: {
-                type:type
-            }
-        }).then((res) => {
-            if (res.status === 200 && res.data.code === 0) {
-                this.setState({userList: res.data.data})
-            }
-        })
+        this.props.getUserList(type);
     }
     render() {
-        return <UserList {...this.props} userList={this.state.userList}/>
+        return <UserList {...this.props} />
     }
 }
 
-const mapStateToProps = ({AuthReducer: state}) => {
-    return {...state};
+const mapStateToProps = ({AuthReducer: state,Chat:chat}) => {
+    return {...state,userList:chat.userList};
 };
-
-export default  withRouter( connect(mapStateToProps)(UserListContainer) );
+const mapDispatchToProps=(dispatch)=>{
+    return{getUserList:(type)=>dispatch(getUsrList(type)) }
+}
+export default  withRouter( connect(mapStateToProps,mapDispatchToProps)(UserListContainer) );

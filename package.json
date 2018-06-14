@@ -20,7 +20,10 @@
     "utility": "^1.13.1",
     "cookie-parser": "^1.4.3",
     "socket.io": "^2.1.1",
-    "socket.io-client": "^2.1.1"
+    "socket.io-client": "^2.1.1",
+    "rc-animate":"^2.4.4",
+    "rc-queue-anim":"^1.6.2",
+    "rc-tween-one":"^2.0.6"
   },
   "scripts": {
     "start": "react-scripts start",

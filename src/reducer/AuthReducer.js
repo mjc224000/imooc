@@ -22,7 +22,6 @@ const Auth = {
     avatar:null,
     resume:null,
     positionDesc:null,
-    userList:[]
 }
 //reducer
 export default function AuthReducer(state = Auth, action) {

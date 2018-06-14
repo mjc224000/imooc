@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {InputItem, List} from 'antd-mobile';
 import './chat.css';
 import {logout} from "../../reducer/AuthReducer";
+import Animate from 'rc-queue-anim';
 class Chat extends Component {
     static defaultProps = {
         chatmsg: []
@@ -30,28 +31,38 @@ class Chat extends Component {
         this.setState({text: v})
     }
     componentDidMount(){
-         this.scrollToBottom();
+     this.scrollToBottom();
     }
     /* 设置滚动条到底部，在didMount和Click之后调用*/
     scrollToBottom(){
         setTimeout(()=>{
+
             var target=this.chatList.current;
             var scrollTop=target.scrollHeight-target.clientHeight;
-            target.scrollTo(0,scrollTop) }  ,0);
+            console.log(scrollTop);
+            target.scrollTo(0,scrollTop) }  ,200);
     }
     render() {
         const Item = List.Item
     const curId=this.props.location.query.id
       const curChatMsg=this.props.chatmsg.filter(v=>v.from===curId || v.to===curId);
+        var len=curChatMsg.length;
         return (
             <div ref={this.chatList} className='chat'>
                 <div    className='chat-list'>
                     <List>
-                        {curChatMsg.map((v,i) => {
+                        { len>15? curChatMsg.map((v,i) => {
                             return v.from === this.props._id ?
                                 <Item key={i} extra={<img src={this.props.avatar} alt=""/>}>{v.content}</Item> :
                                 <Item key={i} thumb={<img src={this.props.location.query.avatar}/>   }>{v.content}</Item>
-                        })}
+                        })
+                        : <Animate delay={30} >
+                            {curChatMsg.map((v,i) => {
+                                return v.from === this.props._id ?
+                                    <Item key={i} extra={<img src={this.props.avatar} alt=""/>}>{v.content}</Item> :
+                                    <Item key={i} thumb={<img src={this.props.location.query.avatar}/>   }>{v.content}</Item>
+                            })}
+                        </Animate>}
                     </List>
                 </div>
                 <div className='chat-footer'>
