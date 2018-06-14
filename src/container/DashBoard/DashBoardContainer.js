@@ -18,13 +18,7 @@ const data = [
         className: 'iconfont icon-shizi',
         title: '信息列表'
     },
-    {
-        path: '/geniusList',
-        component: GeniusList,
-        hide: 'genius',
-        className: 'iconfont icon-superhero-',
-        title: '牛人列表'
-    },
+
     {
         path: '/geniusInfo',
         component: GeniusContainer,
