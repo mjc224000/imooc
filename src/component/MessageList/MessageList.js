@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {Card, List} from 'antd-mobile';
+import {Card, List,WhiteSpace} from 'antd-mobile';
 import PropTypes from 'prop-types';
 
-class MessageList extends Component {
+export default class MessageList extends Component {
     static propTypes = {
         msgGroup: PropTypes.arrary
     }
@@ -13,6 +13,7 @@ class MessageList extends Component {
 
     render() {
         const ListItem = List.Item;
+
         return (
             <div>
                 <List>
@@ -24,7 +25,7 @@ class MessageList extends Component {
                                     <Card.Body> {v.content}</Card.Body>
                                     <Card.Footer content={v.unread}/>
                                 </Card>
-                                <WhiteSpance/>
+                                <WhiteSpace/>
                             </ListItem>
                         )
                     })}

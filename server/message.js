@@ -22,6 +22,9 @@ module.exports.message = function (server) {
             {
                 return
             }
+            if(from===to){
+                return
+            }
             const chatid = [from, to].sort().join('_');
             const ChatInstance = new Chat({chatid, from, to, content: msg});
             ChatInstance.save();

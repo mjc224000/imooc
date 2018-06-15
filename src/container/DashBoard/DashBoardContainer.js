@@ -8,6 +8,7 @@ import GeniusContainer from './../GeniusInfo/GeniusInfo';
 import UserListContainer from './../UserList/UserList';
 import InfoCenter from './../InfoCenter/InfoCenter';
 import Chat from './../ChatContainer/chat';
+import MessageList from './../messageList/messageList'
 import {getMsg} from './../../reducer/ChatRedux';
 import {getMsgList} from "../../reducer/ChatRedux";
 
@@ -49,6 +50,13 @@ const data = [
         path: '/InfoCenter',
         className: 'iconfont icon-yonghuzhongxin',
         title: '用户中心'
+    },
+    {
+        title:'',
+        component:MessageList,
+        path:'/messageList',
+        className: "iconfont icon-message",
+        title:"短信"
     }
 ]
 let isFirstOn = false;

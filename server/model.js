@@ -22,5 +22,8 @@ var chatSchema=new Schema({
 })
 const AppUser=mongoose.model('AppUser',userSchema);
 const Chat=mongoose.model('Chat',chatSchema);
+Chat.remove({chatid:'5b1601d4be42f21b4428b683_5b1601d4be42f21b4428b683'} ,function (err) {
+    console.log('re')
+})
 module.exports.AppUser=AppUser;
 module.exports.Chat=Chat;

@@ -188,7 +188,7 @@ class LogoGather extends React.Component {
         );
     }
 }
-class Edit extends React.Component {
+export default class Edit extends React.Component {
     constructor(props) {
         super(props);
         this.defaultImage = {
